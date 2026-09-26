@@ -53,7 +53,18 @@ function Reduce-LanguageTool {
   Set-Content $marca "Idiomas conservados: $($conservar -join ', ')"
 }
 
+# Copia las reglas propias de Corrector Local (carpeta reglas\) dentro de LanguageTool.
+# Se hace siempre, para que los cambios en las reglas lleguen al compilar.
+function Install-Reglas {
+  Get-ChildItem (Join-Path $root 'reglas') -Directory | ForEach-Object {
+    $destino = Join-Path $root "LanguageTool\org\languagetool\rules\$($_.Name)"
+    if (Test-Path $destino) { Copy-Item (Join-Path $_.FullName '*.xml') $destino -Force }
+  }
+  Write-Host 'Reglas propias instaladas.'
+}
+
 Get-Portable 'java' 'https://api.adoptium.net/v3/binary/latest/21/ga/windows/x64/jre/hotspot/normal/eclipse'
 Get-Portable 'LanguageTool' 'https://languagetool.org/download/LanguageTool-stable.zip'
 Reduce-LanguageTool
+Install-Reglas
 Write-Host 'Listo.'

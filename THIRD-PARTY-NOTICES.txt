@@ -17,7 +17,8 @@ Motor de correccion ortografica y gramatical.
 
 Se distribuye la version oficial sin cambios en su codigo; solo se eliminan los
 datos de los idiomas que Corrector Local no usa (se conservan espanol, ingles,
-portugues y catalan) para reducir el tamano. El proceso esta en preparar.ps1.
+portugues y catalan) para reducir el tamano, y se anade el archivo de reglas propias
+rules/es/grammar_custom.xml (carpeta reglas\ del proyecto). El proceso esta en preparar.ps1.
 Corrector Local solo se comunica con el por HTTP (no lo enlaza ni lo modifica).
 Puedes sustituir la carpeta LanguageTool\ por la version completa o por
 cualquier otra, incluida una compilada por ti.

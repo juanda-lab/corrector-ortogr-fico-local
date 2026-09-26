@@ -152,6 +152,7 @@ El flujo [`.github/workflows/compilar.yml`](.github/workflows/compilar.yml) comp
 ```
 ├── extension/             Extensión del navegador (Edge / Chrome)
 ├── instalador/            Código del instalador .exe y script de compilación
+├── reglas/es/             Reglas propias de corrección (errores frecuentes al escribir rápido)
 ├── docs/                  Imágenes del README
 ├── iniciar-servidor.bat   Arranca el servidor mostrando una ventana
 ├── detener-servidor.bat   Detiene el servidor
@@ -161,6 +162,10 @@ El flujo [`.github/workflows/compilar.yml`](.github/workflows/compilar.yml) comp
 ├── preparar.ps1           Descarga Java y LanguageTool
 └── LEEME.txt              Instrucciones incluidas en la instalación
 ```
+
+## Mejorar las correcciones
+
+Las reglas propias están en [`reglas/es/grammar_custom.xml`](reglas/es/grammar_custom.xml) (formato de reglas de [LanguageTool](https://dev.languagetool.org/development-overview)). Para añadir una: copia un bloque `<rule>`, cambia su `id` y el patrón, ejecuta `preparar.ps1` y reinicia el servidor. Si encuentras una palabra que no se detecta, abre un [issue](../../issues) con la frase.
 
 ## Limitaciones
 

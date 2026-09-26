@@ -34,15 +34,13 @@ function New-Zip($zipPath, $root, $excluir) {
   } finally { $zip.Dispose() }
 }
 
-# 0. Dependencias (Java y LanguageTool) si faltan
-if (-not (Test-Path (Join-Path $proj 'java')) -or -not (Test-Path (Join-Path $proj 'LanguageTool'))) {
-  & (Join-Path $proj 'preparar.ps1')
-}
+# 0. Dependencias (Java y LanguageTool) y reglas propias. Solo descarga lo que falta.
+& (Join-Path $proj 'preparar.ps1')
 
 # 1. Paquete con lo que se instala (sin instalador, repositorio ni documentación)
 Write-Host 'Empaquetando archivos...'
 $payload = Join-Path $build 'payload.zip'
-New-Zip $payload $proj @('instalador', 'docs', '.git', '.github', '.gitignore', '.gitattributes', 'README.md', 'preparar.ps1', 'CHANGELOG.md', 'SECURITY.md', 'PRIVACY.md')
+New-Zip $payload $proj @('instalador', 'docs', 'reglas', '.git', '.github', '.gitignore', '.gitattributes', 'README.md', 'preparar.ps1', 'CHANGELOG.md', 'SECURITY.md', 'PRIVACY.md')
 
 # 2. Texto de la página "Licencia y privacidad" del instalador
 $privacidad = @'

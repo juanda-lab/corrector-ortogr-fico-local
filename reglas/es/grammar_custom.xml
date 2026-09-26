@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Reglas propias de Corrector Local para español.
+  Errores frecuentes al escribir rápido (chats, correos) que el diccionario no marca
+  porque coinciden con palabras poco usadas, o que marca con malas sugerencias.
+  preparar.ps1 copia este archivo a LanguageTool/org/languagetool/rules/es/.
+  Formato de reglas: https://dev.languagetool.org/development-overview
+  Para añadir una: copia un bloque <rule>, cambia el id (CL_...) y prueba con
+  iniciar-servidor.bat antes de publicar.
+-->
+<!DOCTYPE rules [
+  <!ENTITY participio "[a-záéíóúñ]*(ado|ada|ido|ida|ído|cho|echo|isto|uesto|ierto|uelto|ito|ito)">
+  <!ENTITY determinante "el|la|los|las|un|una|unos|unas|del|al|su|sus|mi|mis|tu|tus|esta|esa|este|ese|aquella|cada|otra|nueva|vieja|gran|de">
+  <!ENTITY clitico "lo|la|los|las|le|les|me|te|se|nos">
+]>
+<rules lang="es" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<category id="CORRECTOR_LOCAL" name="Errores frecuentes al escribir">
+
+  <!-- ===== Palabras reales que casi siempre son un error ===== -->
+
+  <rule id="CL_CANDO" name="cando → cuando">
+    <pattern><token case_sensitive="no">cando</token></pattern>
+    <message>¿Quisiste decir <suggestion>cuando</suggestion>?</message>
+    <example correction="cuando"><marker>cando</marker> llegues me avisas</example>
+  </rule>
+
+  <rule id="CL_ASTA" name="asta → hasta">
+    <pattern>
+      <token case_sensitive="no">asta<exception scope="previous" regexp="yes">&determinante;</exception></token>
+    </pattern>
+    <message>¿Quisiste decir <suggestion>hasta</suggestion>? («Asta» es el palo de una bandera o el cuerno de un animal).</message>
+    <example correction="hasta"><marker>asta</marker> mañana</example>
+    <example>Izaron la bandera en el asta.</example>
+  </rule>
+
+  <rule id="CL_ABIA" name="abia → había">
+    <pattern><token regexp="yes" case_sensitive="no">ab[ií]a(n|s|mos)?</token></pattern>
+    <message>Se escribe con «h» y tilde: <suggestion><match no="1" regexp_match="(?i)^ab[ií]a" regexp_replace="había" case_conversion="preserve"/></suggestion>.</message>
+    <example correction="había"><marker>abia</marker> mucha gente</example>
+  </rule>
+
+  <rule id="CL_VALLA_VAYA" name="valla → vaya">
+    <pattern>
+      <marker>
+        <token case_sensitive="no">valla<exception scope="previous" regexp="yes">&determinante;</exception></token>
+      </marker>
+      <token regexp="yes">bien|mal|a|al|con|que|qué|,|!|¡|\?|forma|manera|lío|susto|día|tela|pues|hombre|usted|ustedes|ya|tranquilo|tranquila|todo</token>
+    </pattern>
+    <message>¿Quisiste decir <suggestion>vaya</suggestion> (del verbo «ir» o como exclamación)? «Valla» es una cerca.</message>
+    <example correction="vaya"><marker>valla</marker> que bien</example>
+    <example>Saltó la valla con facilidad.</example>
+  </rule>
+
+  <rule id="CL_ASE_HACE" name="ase → hace">
+    <pattern>
+      <marker><token case_sensitive="no">ase</token></marker>
+      <token regexp="yes">frío|frio|calor|tiempo|rato|mucho|poco|falta|días|dias|años|meses|semanas|horas|minutos|un|una|dos|tres|bien|mal|caso|lo|el|la|que|nada|algo|sol|viento</token>
+    </pattern>
+    <message>¿Quisiste decir <suggestion>hace</suggestion> (del verbo «hacer»)?</message>
+    <example correction="hace"><marker>ase</marker> frío</example>
+  </rule>
+
+  <!-- ===== Errores que se detectaban con malas sugerencias ===== -->
+
+  <rule id="CL_ASER" name="aser → hacer">
+    <pattern><token case_sensitive="no">aser</token></pattern>
+    <message>Se escribe <suggestion>hacer</suggestion>.</message>
+    <example correction="hacer">vamos a <marker>aser</marker> la tarea</example>
+  </rule>
+
+  <rule id="CL_ACER" name="acer → hacer">
+    <pattern>
+      <token regexp="yes">a|de|que|para|por|sin|al|va|voy|vas|vamos|van|iba|iban|puedo|puedes|puede|podemos|pueden|quiero|quieres|quiere|queremos|tengo|tienes|tiene|debo|debes|debe|hay|sabe|saber|podría|podrías</token>
+      <marker><token case_sensitive="no">acer</token></marker>
+    </pattern>
+    <message>Se escribe <suggestion>hacer</suggestion>.</message>
+    <example correction="hacer">tengo que <marker>acer</marker> la tarea</example>
+  </rule>
+
+  <rule id="CL_ISE" name="ise → hice">
+    <pattern><token case_sensitive="yes" regexp="yes">ise|Ise</token></pattern>
+    <message>Se escribe <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)ise" regexp_replace="hice"/></suggestion> (del verbo «hacer»).</message>
+    <example correction="hice">ya <marker>ise</marker> la tarea</example>
+  </rule>
+
+  <rule id="CL_ISO" name="iso → hizo">
+    <pattern>
+      <token regexp="yes">&clitico;|que|él|ella|quien|quién|usted|ya|no|se</token>
+      <marker><token case_sensitive="yes">iso</token></marker>
+    </pattern>
+    <message>Se escribe <suggestion>hizo</suggestion> (del verbo «hacer»).</message>
+    <example correction="hizo">ella lo <marker>iso</marker> bien</example>
+  </rule>
+
+  <rule id="CL_NOSE" name="nose → no sé">
+    <pattern><token case_sensitive="no">nose</token></pattern>
+    <message>Se escribe separado y con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)nose" regexp_replace="no sé"/></suggestion>.</message>
+    <example correction="no sé"><marker>nose</marker> qué hacer</example>
+  </rule>
+
+  <rule id="CL_TALVEZ" name="talvez → tal vez">
+    <pattern><token regexp="yes" case_sensitive="no">talves|talvez|talbes|talbez</token></pattern>
+    <message>Se escribe separado: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)tal[bv]e[sz]" regexp_replace="tal vez"/></suggestion>.</message>
+    <example correction="tal vez"><marker>talves</marker> mañana</example>
+  </rule>
+
+  <rule id="CL_HECHAR" name="hechar → echar">
+    <pattern><token regexp="yes" case_sensitive="no">hech(ar|ando|amos|aste|ó|aron|é|ado|arte|arle|arlo|arla|en|es|e)</token></pattern>
+    <message>El verbo «echar» se escribe sin «h»: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^hech" regexp_replace="ech"/></suggestion>.</message>
+    <example correction="echar">voy a <marker>hechar</marker> agua</example>
+  </rule>
+
+  <rule id="CL_DEVERAS" name="deveras → de veras">
+    <pattern><token regexp="yes" case_sensitive="no">deveras|debveras|deberas</token></pattern>
+    <message>Se escribe separado: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^de[bv]+eras$" regexp_replace="de veras"/></suggestion>.</message>
+    <example correction="de veras"><marker>deveras</marker> te lo digo</example>
+  </rule>
+
+  <rule id="CL_HACI" name="haci → así">
+    <pattern><token regexp="yes" case_sensitive="no">haci|asi|ací</token></pattern>
+    <message>Se escribe <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^(haci|asi|ací)$" regexp_replace="así"/></suggestion>.</message>
+    <example correction="así">es <marker>haci</marker></example>
+  </rule>
+
+  <!-- ===== «he» / «ha» (del verbo haber) escritos como «e» / «a» ===== -->
+
+  <!-- Sustituye a E_SINGLE_CHAR de LanguageTool (la extensión la desactiva en español),
+       que tapaba las reglas de «he»: «e» suelta que no es la conjunción (antes de i/hi)
+       ni el verbo haber (antes de participio). -->
+  <rule id="CL_E_SUELTA" name="e suelta">
+    <pattern>
+      <marker><token case_sensitive="no">e</token></marker>
+      <token regexp="yes" negate="yes">(h?[iíIÍ]|[yY]).*|&participio;|echo|echa|echos|echas|[\p{P}]</token>
+    </pattern>
+    <message>¿Falta una letra? Posibles correcciones: <suggestion>en</suggestion>, <suggestion>de</suggestion>, <suggestion>y</suggestion>, <suggestion>es</suggestion>, <suggestion>he</suggestion>.</message>
+    <example correction="en|de|y|es|he">estoy <marker>e</marker> casa</example>
+    <example>padre e hijo</example>
+  </rule>
+
+  <rule id="CL_E_ECHO" name="e echo → he hecho">
+    <pattern>
+      <marker>
+        <token regexp="yes" case_sensitive="no">e|a</token>
+        <token regexp="yes" case_sensitive="no">echo|echa|echos|echas</token>
+      </marker>
+    </pattern>
+    <message>Del verbo «haber» + «hacer»: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^([ea])$" regexp_replace="h$1"/> <match no="2" case_conversion="alllower" regexp_match="(?i)^ech" regexp_replace="hech"/></suggestion>.</message>
+    <example correction="he hecho">no sé si lo <marker>e echo</marker> bien</example>
+  </rule>
+
+  <rule id="CL_E_HE" name="e + participio → he">
+    <pattern>
+      <marker><token case_sensitive="no">e</token></marker>
+      <token regexp="yes">&participio;</token>
+    </pattern>
+    <message>Del verbo «haber» se escribe <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)e" regexp_replace="he"/></suggestion>.</message>
+    <example correction="he">no sé si lo <marker>e</marker> hecho bien</example>
+  </rule>
+
+  <rule id="CL_A_HA" name="a + participio → ha">
+    <pattern>
+      <token regexp="yes">&clitico;|no|ya|nunca|siempre|también|tambien|él|ella|usted|quién|quien|qué|que|alguien|nadie|todo|eso|esto</token>
+      <marker><token>a</token></marker>
+      <token regexp="yes">&participio;</token>
+    </pattern>
+    <message>Del verbo «haber» se escribe <suggestion>ha</suggestion>.</message>
+    <example correction="ha">ella lo <marker>a</marker> hecho</example>
+  </rule>
+
+  <rule id="CL_HABER_ECHO" name="he echo → he hecho">
+    <pattern>
+      <token regexp="yes" case_sensitive="no">he|e|ha|a|has|as|hemos|han|haber|había|habia|abía|abia|habías|habían|hubiera|hubiese|haya</token>
+      <marker><token regexp="yes" case_sensitive="no">echo|echa|echos|echas</token></marker>
+    </pattern>
+    <message>Del verbo «hacer» se escribe con «h»: <suggestion><match no="2" case_conversion="preserve" regexp_match="(?i)^ech" regexp_replace="hech"/></suggestion>.</message>
+    <example correction="hecho">lo he <marker>echo</marker> bien</example>
+  </rule>
+
+</category>
+</rules>

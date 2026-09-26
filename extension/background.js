@@ -23,6 +23,8 @@ async function handle(msg) {
 
   if (msg.type === 'check') {
     const body = new URLSearchParams({ text: msg.text, language: s.language });
+    // En español, la regla propia CL_E_SUELTA sustituye a E_SINGLE_CHAR, que tapaba las correcciones «e» → «he»
+    if (/^(es|auto)/.test(s.language)) body.set('disabledRules', 'E_SINGLE_CHAR');
     const r = await fetch(server + '/v2/check', { method: 'POST', body });
     if (!r.ok) throw new Error('El servidor respondió ' + r.status);
     const data = await r.json();
