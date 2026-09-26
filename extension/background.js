@@ -14,6 +14,9 @@ async function getSettings() {
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   // Al instalar la extensión (p. ej. desde la tienda) se muestra cómo conseguir el corrector para Windows
   if (reason === 'install') chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+  // Al quitar la extensión, el navegador abre esta página: explica cómo desinstalar también el
+  // corrector de Windows, que si no seguiría arrancando con el PC. Es una dirección fija, sin datos.
+  chrome.runtime.setUninstallURL(LINKS.uninstall);
 
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({ id: 'cl-add', title: 'Añadir «%s» a Mi diccionario', contexts: ['selection'] });

@@ -16,6 +16,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - **Aviso en el icono**: «!» rojo si el corrector de Windows no responde, «OFF» si está desactivado.
 - **Clic derecho** sobre un texto seleccionado: «Añadir a Mi diccionario» y «Reportar: no detectó un error aquí».
 - **Reportar** en la ventanita de sugerencias, para avisar de sugerencias equivocadas. Abre un aviso en GitHub ya rellenado que el usuario revisa antes de enviar.
+- Al quitar la extensión se abre una página que explica cómo desinstalar también el corrector de Windows ([DESINSTALAR.md](DESINSTALAR.md)).
 - Compilación automática y publicación de versiones con GitHub Actions.
 
 ### Cambiado

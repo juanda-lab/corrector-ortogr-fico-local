@@ -7,6 +7,7 @@ const LINKS = {
   // Descarga directa del instalador de la última versión (nombre fijo en cada Release)
   installer: `https://github.com/${REPO}/releases/latest/download/Instalador-Corrector-Local.exe`,
   privacy: `https://github.com/${REPO}/blob/main/PRIVACY.md`,
+  uninstall: `https://github.com/${REPO}/blob/main/DESINSTALAR.md`,
   releasesApi: `https://api.github.com/repos/${REPO}/releases/latest`,
 };
 
