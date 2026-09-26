@@ -18,7 +18,7 @@
 
 ## ¿Qué es?
 
-**Corrector Local** subraya los errores mientras escribes en el navegador (WhatsApp Web, Gmail, Outlook, formularios, redes sociales…) y te propone la corrección con un clic.
+**Corrector Local** subraya los errores mientras escribes en el navegador (WhatsApp Web, Gmail, Outlook, Google Sheets, formularios, redes sociales…) y te propone la corrección con un clic.
 
 Usa por debajo **[LanguageTool](https://github.com/languagetool-org/languagetool)**, el motor de corrección de código abierto, ejecutándose como un servidor local en tu propio equipo. Nace como alternativa a la extensión oficial de LanguageTool, que desde 2026 es solo para usuarios de pago.
 
@@ -149,6 +149,7 @@ Para probar sin instalador: ejecuta `iniciar-servidor.bat` y carga la carpeta `e
 ## Limitaciones
 
 - **Google Docs** no es compatible (no usa campos de texto normales).
+- En **Google Sheets** solo subraya mientras editas una celda: al pulsar Enter, Sheets dibuja la celda como imagen.
 - La extensión se carga en **modo desarrollador**; algunos equipos de empresa lo bloquean por política.
 - Las funciones de pago de LanguageTool basadas en IA (reescritura, cambio de tono) no están incluidas.
 - Para mejorar la detección de confusiones (`a`/`ha`, `tubo`/`tuvo`…) se pueden añadir los [n-gramas de LanguageTool](https://dev.languagetool.org/finding-errors-using-n-gram-data) (varios GB) y activarlos en `server.properties`.
