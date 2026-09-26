@@ -1,4 +1,4 @@
-const DEFAULTS = { enabled: true, language: 'es', server: 'http://localhost:8081', dictionary: [], disabledSites: [] };
+const DEFAULTS = { enabled: true, language: 'es', server: 'http://localhost:8081', disabledSites: [] };
 const $ = (id) => document.getElementById(id);
 
 function newerThan(a, b) {
@@ -46,38 +46,17 @@ $('guideLink').addEventListener('click', (e) => {
   chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
 });
 
-function renderDictionary(words) {
-  const ul = $('dict');
-  ul.textContent = '';
-  if (!words.length) {
-    const li = document.createElement('li');
-    li.className = 'empty';
-    li.textContent = 'Vacío. Usa "Añadir al diccionario" en una palabra.';
-    ul.append(li);
-    return;
-  }
-  for (const w of words) {
-    const li = document.createElement('li');
-    li.append(w);
-    const del = document.createElement('button');
-    del.textContent = '✕';
-    del.title = 'Quitar';
-    del.addEventListener('click', () => {
-      const next = words.filter((x) => x !== w);
-      chrome.storage.local.set({ dictionary: next });
-      renderDictionary(next);
-    });
-    li.append(del);
-    ul.append(li);
-  }
-}
+// El diccionario se gestiona en su propia página (diccionario.html); aquí solo el contador
+DICT.load().then((words) => {
+  $('dictCount').textContent = words.length === 1 ? '1 palabra' : `${words.length} palabras`;
+});
+$('openDict').addEventListener('click', () => chrome.runtime.openOptionsPage());
 
 chrome.storage.local.get(Object.keys(DEFAULTS), (stored) => {
   const s = { ...DEFAULTS, ...stored };
   $('enabled').checked = s.enabled;
   $('language').value = s.language;
   $('server').value = s.server;
-  renderDictionary(s.dictionary);
   setupSite(s.disabledSites);
   checkServer();
 });

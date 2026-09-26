@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi diccionario · Corrector Local</title>
+  <style>
+    :root {
+      --bg: #f6f8fc; --card: #ffffff; --fg: #1c1d1f; --muted: #5f6570; --line: #e3e6eb;
+      --accent: #2563eb; --accent-fg: #ffffff; --field: #f5f6f8; --bad: #dc2626; --ok: #16a34a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #16171a; --card: #202124; --fg: #e8eaed; --muted: #9aa0a6; --line: #3c4043;
+              --accent: #8ab4f8; --accent-fg: #0b1b3a; --field: #2a2b2e; --bad: #f87171; --ok: #4ade80; }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+    main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
+    header { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    header img { width: 48px; height: 48px; }
+    h1 { font-size: 24px; margin: 0; line-height: 1.2; }
+    .sub { color: var(--muted); margin: 2px 0 0; font-size: 14px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    input[type=text], input[type=search] { flex: 1; min-width: 180px; padding: 9px 12px; border: 1px solid var(--line);
+      border-radius: 8px; background: var(--field); color: var(--fg); font: inherit; }
+    button, .btn { border: 1px solid var(--line); background: var(--card); color: var(--fg); padding: 8px 14px;
+      border-radius: 8px; font: 600 14px "Segoe UI", system-ui, sans-serif; cursor: pointer; }
+    button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+    button.danger { color: var(--bad); }
+    button:hover { filter: brightness(1.05); }
+    #search { width: 100%; }
+    .count { color: var(--muted); font-size: 14px; margin: 12px 0 8px; }
+    ul { list-style: none; margin: 0; padding: 0; columns: 3 170px; column-gap: 20px; }
+    li { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 5px 4px;
+      border-bottom: 1px solid var(--line); break-inside: avoid; }
+    li button { border: 0; background: none; padding: 0 4px; color: var(--muted); font-size: 15px; }
+    li button:hover { color: var(--bad); }
+    .empty { color: var(--muted); font-style: italic; padding: 12px 0; }
+    .msg { font-size: 14px; margin-top: 10px; min-height: 20px; }
+    .msg.ok { color: var(--ok); } .msg.bad { color: var(--bad); }
+    .note { color: var(--muted); font-size: 13px; }
+    h2 { font-size: 15px; margin: 0 0 10px; }
+    footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icons/128.png" alt="">
+    <div>
+      <h1>Mi diccionario</h1>
+      <p class="sub">Palabras que Corrector Local no marcará como error</p>
+    </div>
+  </header>
+
+  <section class="card">
+    <form class="row" id="addForm">
+      <input type="text" id="newWord" placeholder="Añadir palabras (puedes separar varias con comas)" autocomplete="off" spellcheck="false">
+      <button type="submit" class="primary">Añadir</button>
+    </form>
+    <div class="msg" id="msg"></div>
+  </section>
+
+  <section class="card">
+    <input type="search" id="search" placeholder="Buscar en mi diccionario…" autocomplete="off" spellcheck="false">
+    <div class="count" id="count"></div>
+    <ul id="list"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Usarlo en otros PCs</h2>
+    <p class="note">Si usas el navegador con <b>la misma cuenta</b> y la sincronización activada, el diccionario se
+      sincroniza solo entre tus PCs. Si no, expórtalo aquí e impórtalo en el otro PC.</p>
+    <div class="row">
+      <button type="button" id="export">Exportar (.txt)</button>
+      <button type="button" id="import">Importar…</button>
+      <input type="file" id="file" accept=".txt,text/plain" hidden>
+      <span style="flex:1"></span>
+      <button type="button" class="danger" id="clear">Vaciar diccionario</button>
+    </div>
+  </section>
+
+  <footer>Corrector Local · Desarrollado por <b>Daniel</b></footer>
+</main>
+<script src="dict.js"></script>
+<script src="diccionario.js"></script>
+</body>
+</html>

@@ -42,6 +42,8 @@
     li button { border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 14px; }
     li button:hover { color: var(--bad); }
     .empty { color: var(--muted); font-style: italic; }
+    .link-btn { border: 1px solid var(--line); background: var(--field); color: var(--accent); border-radius: 6px;
+                padding: 4px 12px; font: 600 12px "Segoe UI", system-ui, sans-serif; cursor: pointer; }
     footer { padding: 8px 14px; border-top: 1px solid var(--line); text-align: center;
              color: var(--muted); font-size: 11px; }
     footer strong { color: var(--fg); font-weight: 600; }
@@ -98,9 +100,9 @@
     </select>
   </section>
 
-  <section>
-    <label>Mi diccionario</label>
-    <ul id="dict"></ul>
+  <section class="row">
+    <span><label>Mi diccionario</label> <span class="muted" id="dictCount"></span></span>
+    <button type="button" class="link-btn" id="openDict">Abrir</button>
   </section>
 
   <section>
@@ -111,6 +113,7 @@
   <footer>Desarrollado por <strong>Daniel</strong> · v<span id="version"></span></footer>
 
   <script src="links.js"></script>
+  <script src="dict.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -1,13 +1,14 @@
 # Política de privacidad — Corrector Local
 
-_Última actualización: 25 de septiembre de 2026_
+_Última actualización: 26 de septiembre de 2026_
 
 Corrector Local (el programa para Windows y la extensión "Corrector Local" para Microsoft Edge y Google Chrome) está diseñado para **no recoger ningún dato**.
 
 ## Qué datos se procesan
 
 - **Texto que escribes en campos de páginas web.** La extensión lo envía únicamente al servidor de corrección que se ejecuta **en tu propio PC** (`http://127.0.0.1:8081` / `http://localhost:8081`), que lo analiza y devuelve las sugerencias. Ese texto **nunca se envía a internet**, no se guarda en disco y se descarta después de cada revisión.
-- **Ajustes y diccionario personal.** Si activas o desactivas el corrector, cambias el idioma o añades palabras al diccionario, se guardan en el almacenamiento local de la extensión en tu navegador (`chrome.storage.local`). No se sincronizan ni se envían a ningún sitio.
+- **Ajustes.** Si activas o desactivas el corrector, cambias el idioma o lo desactivas en un sitio, se guarda en el almacenamiento local de la extensión en tu navegador (`chrome.storage.local`). No sale de tu PC.
+- **Diccionario personal.** Las palabras que añades a «Mi diccionario» se guardan en `chrome.storage.sync`: si tienes la sincronización del navegador activada, tu navegador las sincroniza entre tus PCs a través de tu cuenta de Microsoft o Google (igual que tus favoritos). Solo se sincronizan esas palabras, nunca el texto que escribes. El autor no tiene acceso a ellas.
 
 ## Conexiones a internet
 
@@ -26,7 +27,7 @@ Corrector Local (el programa para Windows y la extensión "Corrector Local" para
 |---|---|
 | Acceso a las páginas que visitas (`<all_urls>`) | Detectar los campos de texto donde escribes y subrayar los errores. |
 | `http://localhost/*`, `http://127.0.0.1/*` | Comunicarse con el servidor de corrección de tu PC. |
-| `storage` | Guardar tus ajustes, tu diccionario personal y los sitios donde desactivaste el corrector, en el navegador. |
+| `storage` | Guardar tus ajustes y los sitios donde desactivaste el corrector (en el navegador), y tu diccionario personal (sincronizado por el navegador con tu cuenta, si lo tienes activado). |
 | `activeTab` | Saber en qué sitio estás cuando abres la ventana de la extensión, para el interruptor "Revisar en este sitio". Solo se usa en ese momento y no se guarda el historial. |
 
 ## Contacto

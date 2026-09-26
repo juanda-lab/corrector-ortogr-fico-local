@@ -26,13 +26,17 @@
   function applySettings(s) {
     if ('enabled' in s) enabled = s.enabled !== false;
     if ('disabledSites' in s) siteDisabled = (s.disabledSites || []).includes(location.hostname);
-    if ('dictionary' in s) dictionary = new Set(s.dictionary || []);
     if (!isOn()) { hidePopup(); active && active.clear(); }
   }
 
-  chrome.storage.local.get(['enabled', 'disabledSites', 'dictionary'], applySettings);
+  chrome.storage.local.get(['enabled', 'disabledSites'], applySettings);
 
-  chrome.storage.onChanged.addListener((changes) => {
+  // Diccionario personal (storage.sync, ver dict.js)
+  DICT.load().then((words) => { dictionary = new Set(words); }).catch(() => {});
+  DICT.onChange((words) => { dictionary = new Set(words); schedule(0); });
+
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== 'local') return;
     const s = {};
     for (const k of Object.keys(changes)) s[k] = changes[k].newValue;
     applySettings(s);
@@ -452,11 +456,9 @@
       add.textContent = 'Añadir al diccionario';
       add.addEventListener('click', () => {
         hidePopup();
-        chrome.storage.local.get('dictionary', (s) => {
-          const words = new Set(s.dictionary || []);
-          words.add(m.word.toLowerCase());
-          chrome.storage.local.set({ dictionary: [...words].sort() });
-        });
+        dictionary.add(m.word.toLowerCase()); // efecto inmediato; se guarda y sincroniza aparte
+        schedule(0);
+        DICT.add(m.word).catch(() => {});
       });
       actions.append(add);
     }
