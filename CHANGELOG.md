@@ -8,7 +8,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - Atajo **Alt+Enter**: corrige con la primera sugerencia el error junto al cursor, sin usar el ratón.
 - **Revisar en este sitio**: interruptor en la ventana de la extensión para desactivarla solo en una página concreta.
 - Instalación más sencilla: la página de bienvenida y la ventana de la extensión descargan el instalador directamente, y la pantalla final del instalador abre la extensión en la tienda de Edge (la instalación manual queda como opción avanzada).
-- **Reglas propias para errores frecuentes al escribir rápido** (carpeta `reglas/`): cando → cuando, asta → hasta, abia → había, valla → vaya, ase → hace, aser/acer → hacer, ise → hice, iso → hizo, nose → no sé, talves → tal vez, hechar → echar, deveras → de veras, haci → así, «e echo» → «he hecho» y «e» suelta.
+- **Reglas propias para errores frecuentes al escribir rápido** (carpeta `reglas/`): cando → cuando, asta → hasta, abia → había, valla → vaya, ase → hace, aser/acer → hacer, ise → hice, iso → hizo, nose → no sé, talves → tal vez, hechar → echar, deveras → de veras, haci → así, «e echo» → «he hecho» y «e» suelta; preguntas sin tilde (dónde, cuándo, quién, cuál, cuánto, por qué); «que si» → «que sí»; ay/hay, halla/haya, tubo/tuvo, calló/cayó, ves/vez, bale/vale, coser/cocer; sabo → sé, satisfació → satisfizo, «si tendría» → «si tuviera»; «más mejor», «le dije a ellos», queísmo («me acuerdo que» → «de que»); abreviaturas de chat (xq, tmb, k).
+- Ya no se marcan como error las palabras alargadas a propósito («holaaa», «siii»).
 - Compilación automática y publicación de versiones con GitHub Actions.
 
 ### Cambiado

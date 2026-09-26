@@ -54,6 +54,8 @@
 
   function keep(m) {
     if (m.kind === 'spell' && dictionary.has(m.word.toLowerCase())) return false;
+    // Palabras alargadas a propósito en chats: "holaaa", "siii", "nooo"
+    if (m.kind === 'spell' && /(\p{L})\1\1/u.test(m.word)) return false;
     if (ignored.has(m.rule.id + '|' + m.word)) return false;
     return true;
   }

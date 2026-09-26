@@ -176,5 +176,402 @@
     <example correction="hecho">lo he <marker>echo</marker> bien</example>
   </rule>
 
+  <!-- ===== Interrogativos sin tilde en preguntas (hasta el signo «?») ===== -->
+
+  <rule id="CL_PREG_DONDE" name="donde en pregunta → dónde">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">donde<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^donde$" regexp_replace="dónde"/></suggestion>.</message>
+    <example correction="dónde"><marker>donde</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_ADONDE" name="adonde en pregunta → adónde">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">adonde<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^adonde$" regexp_replace="adónde"/></suggestion>.</message>
+    <example correction="adónde"><marker>adonde</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUANDO" name="cuando en pregunta → cuándo">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cuando<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cuando$" regexp_replace="cuándo"/></suggestion>.</message>
+    <example correction="cuándo"><marker>cuando</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_QUIEN" name="quien en pregunta → quién">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">quien<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^quien$" regexp_replace="quién"/></suggestion>.</message>
+    <example correction="quién"><marker>quien</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_QUIENES" name="quienes en pregunta → quiénes">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">quienes<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^quienes$" regexp_replace="quiénes"/></suggestion>.</message>
+    <example correction="quiénes"><marker>quienes</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUAL" name="cual en pregunta → cuál">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cual<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cual$" regexp_replace="cuál"/></suggestion>.</message>
+    <example correction="cuál"><marker>cual</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUALES" name="cuales en pregunta → cuáles">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cuales<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cuales$" regexp_replace="cuáles"/></suggestion>.</message>
+    <example correction="cuáles"><marker>cuales</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUANTO" name="cuanto en pregunta → cuánto">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cuanto<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cuanto$" regexp_replace="cuánto"/></suggestion>.</message>
+    <example correction="cuánto"><marker>cuanto</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUANTA" name="cuanta en pregunta → cuánta">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cuanta<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cuanta$" regexp_replace="cuánta"/></suggestion>.</message>
+    <example correction="cuánta"><marker>cuanta</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUANTOS" name="cuantos en pregunta → cuántos">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cuantos<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cuantos$" regexp_replace="cuántos"/></suggestion>.</message>
+    <example correction="cuántos"><marker>cuantos</marker> vienes?</example>
+  </rule>
+  <rule id="CL_PREG_CUANTAS" name="cuantas en pregunta → cuántas">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">cuantas<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>En una pregunta se escribe con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^cuantas$" regexp_replace="cuántas"/></suggestion>.</message>
+    <example correction="cuántas"><marker>cuantas</marker> vienes?</example>
+  </rule>
+  <!-- ===== Preguntas: porque → por qué ===== -->
+
+  <rule id="CL_PREG_PORQUE" name="porque en pregunta → por qué">
+    <pattern>
+      <marker><token case_sensitive="no" skip="-1">porque<exception scope="previous" regexp="yes">[\p{L}\d]+</exception></token></marker>
+      <token>?</token>
+    </pattern>
+    <message>Para preguntar se escribe separado y con tilde: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^porque$" regexp_replace="por qué"/></suggestion>.</message>
+    <example correction="por qué"><marker>porque</marker> no viniste?</example>
+  </rule>
+
+  <!-- ===== «sí» afirmativo al final de la frase ===== -->
+
+  <rule id="CL_SI_AFIRMATIVO" name="que si. → que sí">
+    <pattern>
+      <token regexp="yes">que|creo|claro|pues|eso|ya|dije|dijo|dile|decir|digo|ojalá|obvio|seguro|parece|supongo|espero|también|tambien|pero</token>
+      <marker><token case_sensitive="no">si</token></marker>
+      <token regexp="yes">[.!?,;]</token>
+    </pattern>
+    <message>Como afirmación lleva tilde: <suggestion>sí</suggestion>.</message>
+    <example correction="sí">dile que <marker>si</marker>.</example>
+  </rule>
+
+  <rule id="CL_SI_AFIRMATIVO_FIN" name="que si (final) → que sí">
+    <pattern>
+      <token regexp="yes">que|creo|claro|pues|eso|ya|dije|dijo|dile|decir|digo|ojalá|obvio|seguro|parece|supongo|espero|también|tambien|pero</token>
+      <marker><token case_sensitive="no" postag="SENT_END">si</token></marker>
+    </pattern>
+    <message>Como afirmación lleva tilde: <suggestion>sí</suggestion>.</message>
+    <example correction="sí">dile que <marker>si</marker></example>
+  </rule>
+
+  <!-- ===== Confusiones ===== -->
+
+  <rule id="CL_AY_HAY" name="ay mucho → hay mucho">
+    <pattern>
+      <marker><token case_sensitive="no">ay</token></marker>
+      <token regexp="yes">mucho|mucha|muchos|muchas|un|una|unos|unas|algo|nada|nadie|gente|tiempo|poco|poca|pocos|pocas|dos|tres|varios|varias|más|mas|menos|problema|problemas|comida|trabajo|clase|clases|luz|agua|internet|señal|alguien|otro|otra|otros|otras</token>
+    </pattern>
+    <message>Del verbo «haber» se escribe <suggestion>hay</suggestion> («ay» es una queja).</message>
+    <example correction="hay"><marker>ay</marker> mucho trabajo</example>
+  </rule>
+
+  <rule id="CL_HALLA_HAYA" name="halla + participio → haya">
+    <pattern>
+      <marker><token regexp="yes" case_sensitive="no">halla|hallas|hallan|hallamos</token></marker>
+      <token regexp="yes">&participio;</token>
+    </pattern>
+    <message>Del verbo «haber» se escribe <suggestion><match no="1" regexp_match="(?i)^hall" regexp_replace="hay"/></suggestion> («halla» es de «hallar», encontrar).</message>
+    <example correction="haya">que no se <marker>halla</marker> ido</example>
+  </rule>
+
+  <rule id="CL_TUBO_TUVO" name="tubo → tuvo">
+    <pattern>
+      <marker><token case_sensitive="no">tubo</token></marker>
+      <token regexp="yes">razón|suerte|miedo|hambre|frío|frio|calor|tiempo|ganas|problemas|éxito|cuidado|que|un|una|dos|tres|mucho|mucha|muchos|muchas|sed|sueño|fiebre|gripa|gripe</token>
+    </pattern>
+    <message>Del verbo «tener» se escribe <suggestion>tuvo</suggestion> («tubo» es un cilindro).</message>
+    <example correction="tuvo">él <marker>tubo</marker> razón</example>
+    <example>El tubo del agua está roto.</example>
+  </rule>
+
+  <rule id="CL_CALLO_CAYO" name="calló al suelo → cayó">
+    <pattern>
+      <marker><token regexp="yes" case_sensitive="no">calló|callo</token></marker>
+      <token regexp="yes">al|en|por|desde|encima|sobre|abajo|dormido|enfermo|enferma</token>
+    </pattern>
+    <message>Del verbo «caer» (no «callar»): <suggestion>cayó</suggestion>.</message>
+    <example correction="cayó">se <marker>calló</marker> al suelo</example>
+  </rule>
+
+  <rule id="CL_VES_VEZ" name="otra ves → vez">
+    <pattern>
+      <token regexp="yes">otra|una|cada|tal|esta|la|alguna|primera|última|ultima|segunda|tercera|a|de|en|su|próxima|proxima|rara|toda|ninguna</token>
+      <marker><token case_sensitive="no">ves</token></marker>
+    </pattern>
+    <message>Se escribe <suggestion>vez</suggestion> («ves» es del verbo «ver»).</message>
+    <example correction="vez">otra <marker>ves</marker> lo mismo</example>
+  </rule>
+
+  <rule id="CL_BALE_VALE" name="bale → vale">
+    <pattern><token case_sensitive="no">bale</token></pattern>
+    <message>Se escribe <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^bale$" regexp_replace="vale"/></suggestion>.</message>
+    <example correction="vale">no se <marker>bale</marker></example>
+  </rule>
+
+  <rule id="CL_COSER_COCER" name="coser el arroz → cocer">
+    <pattern>
+      <marker><token regexp="yes" case_sensitive="no">coser|cose|coso|cosí|cosió|cosiendo|cosido</token></marker>
+      <token regexp="yes" min="0">el|la|los|las|un|una|unos|unas|bien|más|mas</token>
+      <token regexp="yes">arroz|papa|papas|patata|patatas|pasta|huevo|huevos|carne|verdura|verduras|frijoles|fríjoles|pollo|comida|fideos|espaguetis|lentejas|garbanzos|yuca|plátano|platano|maíz|maiz</token>
+    </pattern>
+    <message>Para la comida es «cocer»: <suggestion><match no="1" regexp_match="(?i)^cos" regexp_replace="coc"/></suggestion> («coser» es con aguja e hilo).</message>
+    <example correction="cocer">voy a <marker>coser</marker> el arroz</example>
+  </rule>
+
+  <!-- ===== Verbos ===== -->
+
+  <rule id="CL_SABO" name="sabo → sé">
+    <pattern><token case_sensitive="no">sabo</token></pattern>
+    <message>Del verbo «saber» se dice <suggestion>sé</suggestion>.</message>
+    <example correction="sé">yo <marker>sabo</marker> nadar</example>
+  </rule>
+
+  <rule id="CL_SATISFACER" name="satisfació → satisfizo">
+    <pattern><token regexp="yes" case_sensitive="no">satisfació|satisfacio</token></pattern>
+    <message>«Satisfacer» se conjuga como «hacer»: <suggestion>satisfizo</suggestion>.</message>
+    <example correction="satisfizo">el resultado <marker>satisfació</marker> a todos</example>
+  </rule>
+
+  <rule id="CL_SATISFACER_1" name="satisfací → satisfice">
+    <pattern><token regexp="yes" case_sensitive="no">satisfací|satisfaci</token></pattern>
+    <message>«Satisfacer» se conjuga como «hacer»: <suggestion>satisfice</suggestion>.</message>
+    <example correction="satisfice">yo <marker>satisfací</marker> la demanda</example>
+  </rule>
+
+  <!-- ===== «si» + condicional → subjuntivo (si tendría → si tuviera) ===== -->
+
+  <rule id="CL_SI_COND_TENDR" name="si tendría → si tuviera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">tendrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^tendrí(a|as|an)$" regexp_replace="tuvier$1"/></suggestion>.</message>
+    <example correction="tuviera">si <marker>tendría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_PODR" name="si podría → si pudiera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">podrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^podrí(a|as|an)$" regexp_replace="pudier$1"/></suggestion>.</message>
+    <example correction="pudiera">si <marker>podría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_HAR" name="si haría → si hiciera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">harí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^harí(a|as|an)$" regexp_replace="hicier$1"/></suggestion>.</message>
+    <example correction="hiciera">si <marker>haría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_SER" name="si sería → si fuera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">serí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^serí(a|as|an)$" regexp_replace="fuer$1"/></suggestion>.</message>
+    <example correction="fuera">si <marker>sería</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_ESTAR" name="si estaría → si estuviera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">estarí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^estarí(a|as|an)$" regexp_replace="estuvier$1"/></suggestion>.</message>
+    <example correction="estuviera">si <marker>estaría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_HABR" name="si habría → si hubiera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">habrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^habrí(a|as|an)$" regexp_replace="hubier$1"/></suggestion>.</message>
+    <example correction="hubiera">si <marker>habría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_SABR" name="si sabría → si supiera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">sabrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^sabrí(a|as|an)$" regexp_replace="supier$1"/></suggestion>.</message>
+    <example correction="supiera">si <marker>sabría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_IR" name="si iría → si fuera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">irí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^irí(a|as|an)$" regexp_replace="fuer$1"/></suggestion>.</message>
+    <example correction="fuera">si <marker>iría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_DIR" name="si diría → si dijera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">dirí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^dirí(a|as|an)$" regexp_replace="dijer$1"/></suggestion>.</message>
+    <example correction="dijera">si <marker>diría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_VENDR" name="si vendría → si viniera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">vendrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^vendrí(a|as|an)$" regexp_replace="vinier$1"/></suggestion>.</message>
+    <example correction="viniera">si <marker>vendría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_QUERR" name="si querría → si quisiera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">querrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^querrí(a|as|an)$" regexp_replace="quisier$1"/></suggestion>.</message>
+    <example correction="quisiera">si <marker>querría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_PONDR" name="si pondría → si pusiera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">pondrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^pondrí(a|as|an)$" regexp_replace="pusier$1"/></suggestion>.</message>
+    <example correction="pusiera">si <marker>pondría</marker> tiempo</example>
+  </rule>
+  <rule id="CL_SI_COND_SALDR" name="si saldría → si saliera">
+    <pattern>
+      <token case_sensitive="no">si</token>
+      <token regexp="yes" min="0">yo|tú|tu|él|ella|usted|nosotros|ellos|ellas|ustedes|no|me|te|se|le|lo|la|nos|les</token>
+      <marker><token regexp="yes" case_sensitive="no">saldrí(a|as|an)</token></marker>
+    </pattern>
+    <message>Tras «si» condicional va el subjuntivo: <suggestion><match no="3" regexp_match="(?i)^saldrí(a|as|an)$" regexp_replace="salier$1"/></suggestion>.</message>
+    <example correction="saliera">si <marker>saldría</marker> tiempo</example>
+  </rule>
+
+  <!-- ===== Gramática ===== -->
+
+  <rule id="CL_MAS_MEJOR" name="más mejor → mejor">
+    <pattern>
+      <marker><token regexp="yes" case_sensitive="no">más|mas</token><token regexp="yes" case_sensitive="no">mejor|mejores|peor|peores|mayor|mayores|menor|menores</token></marker>
+    </pattern>
+    <message>«Mejor», «peor», «mayor» y «menor» ya son comparativos: <suggestion>\2</suggestion>.</message>
+    <example correction="mejor">es <marker>más mejor</marker></example>
+  </rule>
+
+  <rule id="CL_LE_LES" name="le dije a ellos → les">
+    <pattern>
+      <marker><token case_sensitive="no">le</token></marker>
+      <token/>
+      <token>a</token>
+      <token regexp="yes">ellos|ellas|ustedes|todos|todas|ambos|ambas</token>
+    </pattern>
+    <message>Si se refiere a varias personas es plural: <suggestion><match no="1" case_conversion="preserve" regexp_match="(?i)^le$" regexp_replace="les"/></suggestion>.</message>
+    <example correction="les"><marker>le</marker> dije a ellos</example>
+  </rule>
+
+  <rule id="CL_QUEISMO" name="me acuerdo que → me acuerdo de que">
+    <pattern>
+      <token regexp="yes">me|te|se|nos</token>
+      <token regexp="yes" case_sensitive="no">acuerdo|acuerdas|acuerda|acordamos|acuerdan|acordé|acordaste|acordó|acordaron|olvidé|olvido|olvidaste|olvidó|olvidamos|alegro|alegra|alegramos|alegran|enteré|enteraste|enteró|enteramos|enteraron|arrepiento|arrepiente|percaté|percató</token>
+      <marker><token>que</token></marker>
+    </pattern>
+    <message>Este verbo lleva «de»: <suggestion>de que</suggestion>.</message>
+    <example correction="de que">me acuerdo <marker>que</marker> fui</example>
+  </rule>
+
+  <rule id="CL_QUEISMO_CUENTA" name="me di cuenta que → de que">
+    <pattern>
+      <token regexp="yes" case_sensitive="no">di|dio|diste|dimos|dieron|doy|das|da|damos|dan|dar|dando</token>
+      <token>cuenta</token>
+      <marker><token>que</token></marker>
+    </pattern>
+    <message>Se dice «darse cuenta <suggestion>de que</suggestion>».</message>
+    <example correction="de que">me di cuenta <marker>que</marker> era tarde</example>
+  </rule>
+
+  <rule id="CL_QUEISMO_SEGURO" name="estoy seguro que → de que">
+    <pattern>
+      <token regexp="yes" case_sensitive="no">estoy|estás|estas|está|esta|estamos|están|estaba|estaban|estar|estuve|estoi</token>
+      <token regexp="yes" case_sensitive="no">seguro|segura|seguros|seguras|convencido|convencida|convencidos|convencidas</token>
+      <marker><token>que</token></marker>
+    </pattern>
+    <message>Se dice «estar seguro <suggestion>de que</suggestion>».</message>
+    <example correction="de que">estoy seguro <marker>que</marker> vendrá</example>
+  </rule>
+
+  <!-- ===== Abreviaturas de chat ===== -->
+
+  <rule id="CL_CHAT_PORQUE" name="xq / pq → porque">
+    <pattern><token regexp="yes" case_sensitive="no">xq|pq|porq|xk|pk|xke|pke</token></pattern>
+    <message>Abreviatura de chat. Escrito completo: <suggestion>porque</suggestion>, <suggestion>por qué</suggestion>.</message>
+    <example correction="porque|por qué"><marker>xq</marker> no viniste</example>
+  </rule>
+
+  <rule id="CL_CHAT_TAMBIEN" name="tmb / tb → también">
+    <pattern><token regexp="yes" case_sensitive="no">tmb|tb|tbn|tmbn|tambn</token></pattern>
+    <message>Abreviatura de chat. Escrito completo: <suggestion>también</suggestion>.</message>
+    <example correction="también"><marker>tmb</marker> voy</example>
+  </rule>
+
+  <rule id="CL_CHAT_QUE" name="k / q → que">
+    <pattern><token regexp="yes" case_sensitive="yes">k|q|ke|qe</token></pattern>
+    <message>Abreviatura de chat. Escrito completo: <suggestion>que</suggestion>, <suggestion>qué</suggestion>.</message>
+    <example correction="que|qué">nada <marker>k</marker> ver</example>
+  </rule>
+
 </category>
 </rules>
