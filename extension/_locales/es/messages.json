@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Corrector Local"
+  },
+  "extDescription": {
+    "message": "Corrector ortográfico y gramatical privado: revisa lo que escribes con un servidor en tu propio PC, sin enviar texto a internet."
+  }
+}

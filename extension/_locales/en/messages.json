@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Corrector Local"
+  },
+  "extDescription": {
+    "message": "Private spelling and grammar checker: checks what you type with a server on your own PC, without sending text to the internet."
+  }
+}
