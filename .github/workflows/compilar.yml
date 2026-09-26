@@ -49,6 +49,45 @@ jobs:
           Get-ChildItem $dir | ForEach-Object { "{0}  {1:N1} MB" -f $_.Name, ($_.Length / 1MB) }
           "dir=$dir" >> $env:GITHUB_OUTPUT
 
+      # ---------- Firma con SignPath (solo si está configurado) ----------
+      # Se activa al crear en GitHub (Settings → Secrets and variables → Actions):
+      #   Secret   SIGNPATH_API_TOKEN
+      #   Variable SIGNPATH_ORGANIZATION_ID   (y opcionalmente SIGNPATH_PROJECT_SLUG / SIGNPATH_POLICY_SLUG)
+      # Sin ellos, el instalador se publica sin firmar, como hasta ahora.
+      - name: Subir instalador para firmar
+        id: sin-firmar
+        if: vars.SIGNPATH_ORGANIZATION_ID != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: instalador-sin-firmar
+          path: ${{ steps.archivos.outputs.dir }}\Instalador-Corrector-Local.exe
+          retention-days: 1
+
+      - name: Firmar con SignPath
+        if: vars.SIGNPATH_ORGANIZATION_ID != ''
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          connector-url: https://githubactions.connectors.signpath.io
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'corrector-local' }}
+          signing-policy-slug: ${{ vars.SIGNPATH_POLICY_SLUG || 'release-signing' }}
+          github-artifact-id: ${{ steps.sin-firmar.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 3600  # hay que aprobar cada firma a mano en SignPath
+          output-artifact-directory: ${{ runner.temp }}\firmado
+
+      - name: Usar el instalador firmado
+        if: vars.SIGNPATH_ORGANIZATION_ID != ''
+        shell: pwsh
+        run: |
+          $firmado = Get-ChildItem "$env:RUNNER_TEMP\firmado" -Recurse -Filter 'Instalador-Corrector-Local.exe' | Select-Object -First 1
+          if (-not $firmado) { throw 'SignPath no devolvió el instalador firmado' }
+          $sig = Get-AuthenticodeSignature $firmado.FullName
+          "Firma: $($sig.Status) — $($sig.SignerCertificate.Subject)"
+          if ($sig.Status -ne 'Valid') { throw "La firma no es válida: $($sig.StatusMessage)" }
+          Copy-Item $firmado.FullName "${{ steps.archivos.outputs.dir }}\Instalador-Corrector-Local.exe" -Force
+
       - name: Guardar archivos (descargables desde esta ejecución)
         uses: actions/upload-artifact@v7
         with:
@@ -74,7 +113,11 @@ jobs:
 
           Cambios: ver [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md).
 
-          Si Windows muestra "Windows protegió su PC": Más información → Ejecutar de todas formas (el instalador aún no tiene firma digital).
           "@
+          if ('${{ vars.SIGNPATH_ORGANIZATION_ID }}') {
+            $notas += "`nInstalador firmado digitalmente. Free code signing provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org)."
+          } else {
+            $notas += "`nSi Windows muestra `"Windows protegió su PC`": Más información → Ejecutar de todas formas (el instalador aún no tiene firma digital)."
+          }
           gh release create "${{ github.ref_name }}" (Get-ChildItem $dir).FullName `
             --title "Corrector Local ${{ github.ref_name }}" --notes $notas
