@@ -10,27 +10,33 @@
   const HAS_HIGHLIGHTS = typeof CSS !== 'undefined' && CSS.highlights && typeof Highlight === 'function';
 
   let enabled = true;
+  let siteDisabled = false; // el usuario lo desactivó para este sitio
   let dictionary = new Set();
   const ignored = new Set(); // "regla|palabra" ignorados en esta página
 
   let active = null; // objetivo actual (EditableTarget o FieldTarget)
   let timer = null;
   let requestId = 0;
+  let popupHost = null; // ventanita de sugerencias (se crea al primer uso)
 
   // ---------- Ajustes ----------
 
-  chrome.storage.local.get(['enabled', 'dictionary'], (s) => {
-    enabled = s.enabled !== false;
-    dictionary = new Set(s.dictionary || []);
-  });
+  const isOn = () => enabled && !siteDisabled;
+
+  function applySettings(s) {
+    if ('enabled' in s) enabled = s.enabled !== false;
+    if ('disabledSites' in s) siteDisabled = (s.disabledSites || []).includes(location.hostname);
+    if ('dictionary' in s) dictionary = new Set(s.dictionary || []);
+    if (!isOn()) { hidePopup(); active && active.clear(); }
+  }
+
+  chrome.storage.local.get(['enabled', 'disabledSites', 'dictionary'], applySettings);
 
   chrome.storage.onChanged.addListener((changes) => {
-    if (changes.enabled) {
-      enabled = changes.enabled.newValue !== false;
-      if (!enabled) { hidePopup(); active && active.clear(); }
-    }
-    if (changes.dictionary) dictionary = new Set(changes.dictionary.newValue || []);
-    schedule(0);
+    const s = {};
+    for (const k of Object.keys(changes)) s[k] = changes[k].newValue;
+    applySettings(s);
+    schedule(0); // idioma, sitio o diccionario cambiados: revisar de nuevo
   });
 
   // ---------- Utilidades ----------
@@ -144,6 +150,20 @@
       }) || null;
     }
 
+    // Último error que empieza antes del cursor (para Alt+Enter)
+    matchBeforeCaret() {
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return null;
+      const caret = sel.getRangeAt(0);
+      let best = null;
+      for (const m of this.matches) {
+        try {
+          if (m.range.startContainer.isConnected && m.range.compareBoundaryPoints(Range.START_TO_START, caret) <= 0) best = m;
+        } catch { /* rango de otro nodo raíz */ }
+      }
+      return best;
+    }
+
     rectFor(m) { return m.range.getBoundingClientRect(); }
 
     apply(m, replacement) {
@@ -236,6 +256,13 @@
       return this.matches.find((m) => s >= m.offset && s <= m.offset + m.length) || null;
     }
 
+    matchBeforeCaret() {
+      const s = this.el.selectionStart;
+      let best = null;
+      for (const m of this.matches) if (m.offset <= s) best = m;
+      return best;
+    }
+
     rectFor(m) { return this.spans.get(m).getBoundingClientRect(); }
 
     apply(m, replacement) {
@@ -278,7 +305,7 @@
 
   async function runCheck() {
     const t = active;
-    if (!t || !enabled) return;
+    if (!t || !isOn()) return;
     const { text } = t.snapshot();
     const trimmed = text.trim();
     // Muy corto, demasiado largo o una fórmula de hoja de cálculo (=SUMA(...))
@@ -332,8 +359,6 @@
 
   // ---------- Ventanita de sugerencias ----------
 
-  let popupHost = null;
-
   function buildPopup() {
     popupHost = document.createElement('div');
     popupHost.className = 'cl-popup-host';
@@ -367,6 +392,8 @@
         .act { border: 0; background: none; padding: 0; cursor: pointer; color: var(--muted);
                font: 12px "Segoe UI", system-ui, sans-serif; }
         .act:hover { color: var(--fg); text-decoration: underline; }
+        .tip { margin-left: auto; color: var(--muted); font-size: 11px; }
+        kbd { font: 10px Consolas, monospace; border: 1px solid var(--line); border-radius: 3px; padding: 0 3px; }
       </style>
       <div class="card" role="dialog"></div>`;
     // Evita que el editor pierda el foco/selección al pulsar la ventanita
@@ -402,12 +429,7 @@
       const b = document.createElement('button');
       b.className = 'rep';
       b.textContent = r.value || '(borrar)';
-      b.addEventListener('click', () => {
-        hidePopup();
-        target.apply(m, r.value);
-        target.clear();
-        schedule(150);
-      });
+      b.addEventListener('click', () => applyFix(target, m, r.value));
       reps.append(b);
     }
 
@@ -437,6 +459,16 @@
       actions.append(add);
     }
 
+    if (list.length) {
+      const tip = document.createElement('span');
+      tip.className = 'tip';
+      tip.title = 'Aplica la primera sugerencia sin usar el ratón';
+      const k = document.createElement('kbd');
+      k.textContent = 'Alt+Enter';
+      tip.append(k);
+      actions.append(tip);
+    }
+
     card.append(kind, msg, reps, actions);
     if (!popupHost.isConnected) document.documentElement.appendChild(popupHost);
 
@@ -455,7 +487,7 @@
   }
 
   document.addEventListener('click', (e) => {
-    if (!active || !enabled || !active.el.contains(e.target)) return;
+    if (!active || !isOn() || !active.el.contains(e.target)) return;
     // Espera a que el navegador coloque el cursor donde se hizo clic
     setTimeout(() => {
       const m = active && active.matchAtCaret();
@@ -467,8 +499,24 @@
     if (popupHost && e.target !== popupHost) hidePopup();
   }, true);
 
+  function applyFix(target, m, value) {
+    hidePopup();
+    target.apply(m, value);
+    target.clear();
+    schedule(150);
+  }
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') hidePopup();
+
+    // Alt+Enter: corrige con la primera sugerencia el error del cursor, o el anterior más cercano
+    if (e.key === 'Enter' && e.altKey && !e.ctrlKey && !e.shiftKey && active && isOn() && active.el.contains(e.target)) {
+      const m = active.matchAtCaret() || active.matchBeforeCaret();
+      if (!m || !m.replacements || !m.replacements.length) return;
+      e.preventDefault();
+      e.stopPropagation();
+      applyFix(active, m, m.replacements[0].value);
+    }
   }, true);
 
   window.addEventListener('scroll', (e) => {

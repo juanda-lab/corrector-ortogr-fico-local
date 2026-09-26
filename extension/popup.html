@@ -13,6 +13,7 @@
               --ok: #4ade80; --bad: #f87171; --accent: #8ab4f8; --field: #2a2b2e; }
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     body { margin: 0; width: 300px; background: var(--bg); color: var(--fg);
            font: 13px/1.4 "Segoe UI", system-ui, sans-serif; }
     header { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
@@ -44,6 +45,9 @@
     footer { padding: 8px 14px; border-top: 1px solid var(--line); text-align: center;
              color: var(--muted); font-size: 11px; }
     footer strong { color: var(--fg); font-weight: 600; }
+    .toggles .row + .row { margin-top: 8px; }
+    .muted { color: var(--muted); font-size: 12px; }
+    kbd { font: 11px Consolas, monospace; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; background: var(--field); }
     .update { background: color-mix(in srgb, var(--accent) 12%, transparent); }
     .update a { color: var(--accent); font-weight: 600; margin-left: 4px; }
   </style>
@@ -70,6 +74,17 @@
   <section class="update" id="update" hidden>
     Hay una versión nueva: <strong id="updateVersion"></strong>
     <a id="updateLink" target="_blank" rel="noopener">Descargar</a>
+  </section>
+
+  <section class="toggles">
+    <div class="row" id="siteRow" hidden>
+      <span>Revisar en <strong id="siteName"></strong></span>
+      <label class="switch" title="Activar o desactivar solo en este sitio">
+        <input type="checkbox" id="siteEnabled">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="hint"><kbd>Alt</kbd>+<kbd>Enter</kbd> corrige el error junto al cursor con la primera sugerencia.</div>
   </section>
 
   <section>

@@ -26,7 +26,8 @@ Corrector Local (el programa para Windows y la extensión "Corrector Local" para
 |---|---|
 | Acceso a las páginas que visitas (`<all_urls>`) | Detectar los campos de texto donde escribes y subrayar los errores. |
 | `http://localhost/*`, `http://127.0.0.1/*` | Comunicarse con el servidor de corrección de tu PC. |
-| `storage` | Guardar tus ajustes y tu diccionario personal en el navegador. |
+| `storage` | Guardar tus ajustes, tu diccionario personal y los sitios donde desactivaste el corrector, en el navegador. |
+| `activeTab` | Saber en qué sitio estás cuando abres la ventana de la extensión, para el interruptor "Revisar en este sitio". Solo se usa en ese momento y no se guarda el historial. |
 
 ## Contacto
 

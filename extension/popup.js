@@ -1,4 +1,4 @@
-const DEFAULTS = { enabled: true, language: 'es', server: 'http://localhost:8081', dictionary: [] };
+const DEFAULTS = { enabled: true, language: 'es', server: 'http://localhost:8081', dictionary: [], disabledSites: [] };
 const $ = (id) => document.getElementById(id);
 
 function newerThan(a, b) {
@@ -78,6 +78,7 @@ chrome.storage.local.get(Object.keys(DEFAULTS), (stored) => {
   $('language').value = s.language;
   $('server').value = s.server;
   renderDictionary(s.dictionary);
+  setupSite(s.disabledSites);
   checkServer();
 });
 
@@ -89,3 +90,27 @@ $('language').addEventListener('change', (e) => chrome.storage.local.set({ langu
 $('server').addEventListener('change', (e) => {
   chrome.storage.local.set({ server: e.target.value.trim() || DEFAULTS.server }).then(checkServer);
 });
+
+
+// Activar o desactivar en el sitio de la pestaña actual (el permiso activeTab da su URL
+// solo mientras el usuario abre esta ventana)
+async function setupSite(disabledSites) {
+  let host = '';
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const url = new URL(tab.url);
+    if (url.protocol === 'http:' || url.protocol === 'https:') host = url.hostname;
+  } catch { /* pestaña sin URL accesible */ }
+  if (!host) return;
+
+  $('siteName').textContent = host;
+  $('siteEnabled').checked = !disabledSites.includes(host);
+  $('siteRow').hidden = false;
+  $('siteEnabled').addEventListener('change', (e) => {
+    chrome.storage.local.get('disabledSites', (s) => {
+      const sites = new Set(s.disabledSites || []);
+      if (e.target.checked) sites.delete(host); else sites.add(host);
+      chrome.storage.local.set({ disabledSites: [...sites].sort() });
+    });
+  });
+}

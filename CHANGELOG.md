@@ -2,6 +2,17 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Versiones según [SemVer](https://semver.org/lang/es/).
 
+## [1.3.0] - 2026-09-26
+
+### Añadido
+- Atajo **Alt+Enter**: corrige con la primera sugerencia el error junto al cursor, sin usar el ratón.
+- **Revisar en este sitio**: interruptor en la ventana de la extensión para desactivarla solo en una página concreta.
+- Compilación automática y publicación de versiones con GitHub Actions.
+
+### Cambiado
+- Instalador mucho más pequeño: LanguageTool solo incluye español, inglés y portugués (y catalán, que usa el detector de idioma).
+- Nuevo permiso `activeTab`, solo para saber en qué sitio estás al abrir la ventana de la extensión.
+
 ## [1.2.0] - 2026-09-25
 
 ### Añadido

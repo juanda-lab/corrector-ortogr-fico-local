@@ -34,7 +34,9 @@ Usa por debajo **[LanguageTool](https://github.com/languagetool-org/languagetool
 
 - ✍️ Subrayado en tiempo real mientras escribes.
 - 🖱️ Clic en la palabra → sugerencias → se reemplaza sola.
+- ⌨️ **Alt+Enter** corrige el error junto al cursor sin usar el ratón.
 - 📖 Diccionario personal ("Añadir al diccionario") e "Ignorar".
+- 🎚️ Se puede desactivar solo en un sitio concreto.
 - 🌐 Español, español con voseo, inglés, portugués o detección automática.
 - 🔒 Privado: el texto nunca sale de tu PC.
 - 🚀 Arranca solo con Windows y usa como máximo 2 GB de RAM.
@@ -54,7 +56,7 @@ Descarga **`Instalador Corrector Local.exe`** desde la sección [**Releases**](.
 
 - Acepta la licencia y elige la carpeta donde se instalará (por defecto `C:\Users\<usuario>\CorrectorLocal`).
 - Se crean accesos en **Inicio → Corrector Local** (carpeta, léeme, licencias y desinstalar).
-- **No necesita permisos de administrador.** Ocupa unos 550 MB (incluye Java y LanguageTool).
+- **No necesita permisos de administrador.** Descarga de unos 150 MB; instalado ocupa unos 290 MB (incluye Java y LanguageTool).
 - Si Windows muestra *"Windows protegió su PC"*: **Más información → Ejecutar de todas formas** (el instalador no tiene firma digital de pago).
 
 ### 2. Añade la extensión al navegador
@@ -122,7 +124,7 @@ Requisitos: Windows 10/11 (el compilador de C# viene con Windows).
 git clone https://github.com/juanda-lab/corrector-ortogr-fico-local.git
 cd corrector-ortogr-fico-local
 
-# Descarga Java 21 y LanguageTool (unos 290 MB)
+# Descarga Java 21 y LanguageTool y quita los idiomas que no se usan
 powershell -ExecutionPolicy Bypass -File preparar.ps1
 
 # Genera "Instalador Corrector Local.exe" en la carpeta superior

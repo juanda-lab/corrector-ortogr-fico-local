@@ -15,9 +15,12 @@ Motor de correccion ortografica y gramatical.
   Sitio web:             https://languagetool.org
   Codigo fuente:         https://github.com/languagetool-org/languagetool
 
-Se distribuye tal cual, sin cambios. Corrector Local solo se comunica con el
-por HTTP (no lo enlaza ni lo modifica). Puedes sustituir la carpeta
-LanguageTool\ por cualquier otra version, incluida una compilada por ti.
+Se distribuye la version oficial sin cambios en su codigo; solo se eliminan los
+datos de los idiomas que Corrector Local no usa (se conservan espanol, ingles,
+portugues y catalan) para reducir el tamano. El proceso esta en preparar.ps1.
+Corrector Local solo se comunica con el por HTTP (no lo enlaza ni lo modifica).
+Puedes sustituir la carpeta LanguageTool\ por la version completa o por
+cualquier otra, incluida una compilada por ti.
 
 Corrector Local no esta afiliado ni respaldado por LanguageTooler GmbH.
 "LanguageTool" es una marca de sus respectivos titulares.

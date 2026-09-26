@@ -17,9 +17,9 @@ using Microsoft.Win32;
 [assembly: AssemblyCompany("Daniel Diaz")]
 [assembly: AssemblyProduct("Corrector Local")]
 [assembly: AssemblyCopyright("© 2026 Daniel Diaz. Licencia MIT.")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
-[assembly: AssemblyInformationalVersion("1.2.0")]
+[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyFileVersion("1.3.0.0")]
+[assembly: AssemblyInformationalVersion("1.3.0")]
 
 static class Program
 {
@@ -39,7 +39,7 @@ static class Program
 class InstallerForm : Form
 {
     const string AppName = "Corrector Local";
-    const string Version = "1.2.0";
+    const string Version = "1.3.0";
     const string Publisher = "Daniel Diaz";
     const string UninstallKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\CorrectorLocal";
     const string StartupFile = "LanguageTool local.vbs";
@@ -197,7 +197,7 @@ class InstallerForm : Form
         p.Controls.Add(new Label
         {
             Text = "Qué se va a hacer:\r\n" +
-                   "  •  Copiar el corrector (LanguageTool) y Java a esa carpeta  —  unos 550 MB\r\n" +
+                   "  •  Copiar el corrector (LanguageTool) y Java a esa carpeta  —  unos 290 MB\r\n" +
                    "  •  Hacer que arranque solo cada vez que prendas el PC\r\n" +
                    "  •  Añadirlo a \"Aplicaciones instaladas\" de Windows para poder desinstalarlo\r\n" +
                    "  •  Al final, abrir Edge para que añadas la extensión (3 clics)\r\n\r\n" +
