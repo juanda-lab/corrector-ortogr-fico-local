@@ -131,6 +131,18 @@ powershell -ExecutionPolicy Bypass -File instalador\construir.ps1
 
 Para probar sin instalador: ejecuta `iniciar-servidor.bat` y carga la carpeta `extension` en el navegador.
 
+### Compilación automática y publicación de versiones
+
+El flujo [`.github/workflows/compilar.yml`](.github/workflows/compilar.yml) compila en los servidores de GitHub (gratis en repositorios públicos):
+
+- **Probar:** pestaña **Actions → Compilar → Run workflow**. Al terminar, los archivos se descargan desde la ejecución (sección *Artifacts*).
+- **Publicar una versión:** sube la versión en `extension/manifest.json`, `instalador/Instalador.cs` y `CHANGELOG.md`, haz commit y crea la etiqueta:
+  ```powershell
+  git tag v1.3.0
+  git push origin v1.3.0
+  ```
+  GitHub compila y crea la Release con el instalador y el paquete de la extensión.
+
 ### Estructura
 
 ```

@@ -1,0 +1,79 @@
+# Compila el instalador y el paquete de la extensión en los servidores de GitHub.
+#
+# - Botón "Run workflow" (pestaña Actions): compila y deja los archivos para descargar,
+#   sin publicar nada. Sirve para probar.
+# - Al subir una etiqueta vX.Y.Z (p. ej. v1.2.0): compila y crea la Release con los archivos.
+name: Compilar
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write   # necesario para crear la Release
+
+jobs:
+  compilar:
+    runs-on: windows-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Comprobar que la etiqueta coincide con la versión
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        run: |
+          $version = (Get-Content extension/manifest.json -Raw | ConvertFrom-Json).version
+          if ("v$version" -ne "${{ github.ref_name }}") {
+            throw "La etiqueta ${{ github.ref_name }} no coincide con la versión del manifest (v$version)"
+          }
+
+      - name: Descargar Java y LanguageTool
+        shell: powershell
+        run: .\preparar.ps1
+
+      - name: Compilar instalador y paquete de la extensión
+        shell: powershell
+        run: .\instalador\construir.ps1 -Salida "$env:RUNNER_TEMP\salida"
+
+      - name: Nombres de archivo para la descarga
+        id: archivos
+        shell: pwsh
+        run: |
+          $dir = "$env:RUNNER_TEMP\salida"
+          $version = (Get-Content extension/manifest.json -Raw | ConvertFrom-Json).version
+          Rename-Item "$dir\Instalador Corrector Local.exe" "Instalador-Corrector-Local-$version.exe"
+          Rename-Item "$dir\Corrector Local $version - extension.zip" "Corrector-Local-$version-extension.zip"
+          Get-ChildItem $dir | ForEach-Object { "{0}  {1:N1} MB" -f $_.Name, ($_.Length / 1MB) }
+          "dir=$dir" >> $env:GITHUB_OUTPUT
+
+      - name: Guardar archivos (descargables desde esta ejecución)
+        uses: actions/upload-artifact@v4
+        with:
+          name: corrector-local
+          path: ${{ steps.archivos.outputs.dir }}
+          retention-days: 14
+
+      - name: Crear la Release
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $dir = "${{ steps.archivos.outputs.dir }}"
+          $notas = @"
+          **Instalación:** descarga ``Instalador-Corrector-Local-*.exe``, ejecútalo y sigue los pasos. Al final añade la extensión a Edge o Chrome (el instalador te guía).
+
+          - Corrector ortográfico y gramatical que funciona 100 % en tu PC
+          - Extensión para Edge y Chrome: subrayado en tiempo real y sugerencias con un clic
+          - Sin cuentas, sin suscripciones, sin enviar texto a internet
+
+          El archivo ``Corrector-Local-*-extension.zip`` es el paquete de la extensión (para las tiendas o para cargarla en modo desarrollador).
+
+          Cambios: ver [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md).
+
+          Si Windows muestra "Windows protegió su PC": Más información → Ejecutar de todas formas (el instalador aún no tiene firma digital).
+          "@
+          gh release create "${{ github.ref_name }}" (Get-ChildItem $dir).FullName `
+            --title "Corrector Local ${{ github.ref_name }}" --notes $notas
