@@ -1,0 +1,67 @@
+CORRECTOR LOCAL  -  Desarrollado por Daniel
+===========================================
+Corrector ortografico y gramatical que funciona en tu PC (LanguageTool libre).
+
+DESINSTALAR
+  Configuracion de Windows -> Aplicaciones -> Aplicaciones instaladas ->
+  "Corrector Local" -> Desinstalar.  (O ejecuta desinstalar.bat.)
+  Despues quita la extension en edge://extensions.
+
+(Si instalaste con "Instalador Corrector Local.exe", el paso de abajo
+"INSTALAR EN UN PC NUEVO" ya esta hecho; solo falta la extension.)
+
+INSTALAR EN UN PC NUEVO
+1. Copia esta carpeta completa a un lugar fijo, por ejemplo:
+      C:\Users\<tu usuario>\LanguageTool-local
+   (No la dejes en Descargas ni en una memoria USB: tiene que quedarse ahi.)
+2. Doble clic en  instalar.bat
+3. Espera unos 20 segundos y abre en el navegador:
+      http://localhost:8081/v2/languages
+   Si aparece una lista de idiomas, el servidor esta funcionando.
+
+INSTALAR LA EXTENSION PROPIA "CORRECTOR LOCAL" (recomendado)
+1. En Edge abre:  edge://extensions
+   (en Chrome:  chrome://extensions)
+2. Activa "Modo de desarrollador" (en Edge esta en el panel izquierdo;
+   en Chrome arriba a la derecha).
+3. Pulsa "Cargar desempaquetada" y elige la carpeta  extension
+   que esta dentro de esta carpeta.
+4. Recarga WhatsApp Web (o la pagina donde escribas).
+5. Opcional: fija el icono "Ab" en la barra (icono de pieza de puzle -> ojo/pin).
+   Al pulsarlo ves si el servidor funciona, puedes apagarla, cambiar el idioma
+   y ver tu diccionario personal.
+IMPORTANTE: no borres ni muevas la carpeta "extension": Edge la usa desde ahi.
+Si tenias la extension oficial de LanguageTool, quitala para que no subrayen las dos.
+
+USO
+- Escribe normal. Tras medio segundo sin escribir se subrayan los errores:
+    rojo     = ortografia
+    amarillo = gramatica, confusiones (ola/hola, haber/a ver...), estilo
+- Haz clic en una palabra subrayada para ver sugerencias y reemplazarla.
+- "Ignorar" la oculta en esa pagina; "Anadir al diccionario" la acepta siempre.
+
+NOTA SOBRE LA EXTENSION OFICIAL DE LANGUAGETOOL
+Desde la version 1.1.0 el servidor solo acepta peticiones de la extension
+Corrector Local (por seguridad, las paginas web no pueden usarlo). La extension
+oficial de LanguageTool ya no puede conectarse a el: usa Corrector Local.
+
+MENU INICIO
+En Inicio -> "Corrector Local" tienes: la carpeta, este LEEME, las licencias
+y el acceso para desinstalar.
+
+ARCHIVOS
+  instalar.bat          Activa el arranque automatico con Windows y lo inicia.
+  desinstalar.bat       Lo detiene y quita el arranque automatico.
+  iniciar-servidor.bat  Lo arranca mostrando una ventana (para ver errores).
+  detener-servidor.bat  Lo detiene.
+  server.properties     Configuracion.
+  extension\            La extension "Corrector Local" para Edge/Chrome.
+  java\                 Java 21 portatil (no hace falta instalar Java).
+  LanguageTool\         El servidor.
+
+SI NO FUNCIONA
+- Ejecuta iniciar-servidor.bat y mira el mensaje de la ventana.
+- Si dice que el puerto 8081 esta en uso, cambia 8081 por otro numero
+  (por ejemplo 8082) en iniciar-servidor.bat y en la extension.
+- Si el antivirus o TI de la empresa bloquea los .bat/.vbs, habla con ellos:
+  es LanguageTool (software libre) funcionando solo en tu PC, no se conecta a internet.

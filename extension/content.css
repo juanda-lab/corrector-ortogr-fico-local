@@ -1,0 +1,29 @@
+/* Subrayados en editores enriquecidos (WhatsApp, Gmail...) mediante CSS Custom Highlights */
+::highlight(cl-spell) {
+  text-decoration: underline wavy #e5484d;
+  text-decoration-skip-ink: none;
+  background-color: rgba(229, 72, 77, 0.12);
+}
+::highlight(cl-other) {
+  text-decoration: underline wavy #e3a008;
+  text-decoration-skip-ink: none;
+  background-color: rgba(227, 160, 8, 0.12);
+}
+
+/* Capa espejo para <textarea> e <input>, que no admiten highlights */
+.cl-mirror {
+  position: fixed !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  z-index: 2147483646 !important;
+  margin: 0 !important;
+}
+.cl-mirror .cl-u {
+  text-decoration: underline wavy;
+  text-decoration-skip-ink: none;
+}
+.cl-mirror .cl-spell { text-decoration-color: #e5484d; background-color: rgba(229, 72, 77, 0.12); }
+.cl-mirror .cl-other { text-decoration-color: #e3a008; background-color: rgba(227, 160, 8, 0.12); }

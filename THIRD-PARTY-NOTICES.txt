@@ -1,0 +1,34 @@
+AVISOS DE TERCEROS - Corrector Local
+====================================
+
+Corrector Local (c) 2026 Daniel Diaz, bajo licencia MIT (archivo LICENSE).
+El instalador incluye, sin modificar, los siguientes componentes de terceros.
+Cada uno se rige por su propia licencia, que se instala junto a el.
+
+
+1. LanguageTool
+---------------
+Motor de correccion ortografica y gramatical.
+  Copyright (c) Daniel Naber y los colaboradores de LanguageTool.
+  Licencia:  GNU Lesser General Public License v2.1 o posterior (LGPL-2.1+)
+  Texto de la licencia:  LanguageTool\COPYING.txt
+  Sitio web:             https://languagetool.org
+  Codigo fuente:         https://github.com/languagetool-org/languagetool
+
+Se distribuye tal cual, sin cambios. Corrector Local solo se comunica con el
+por HTTP (no lo enlaza ni lo modifica). Puedes sustituir la carpeta
+LanguageTool\ por cualquier otra version, incluida una compilada por ti.
+
+Corrector Local no esta afiliado ni respaldado por LanguageTooler GmbH.
+"LanguageTool" es una marca de sus respectivos titulares.
+
+
+2. Eclipse Temurin (OpenJDK) - Java 21 JRE
+-----------------------------------------
+Entorno de ejecucion Java necesario para LanguageTool.
+  Copyright (c) Oracle y/o sus filiales, y los colaboradores de OpenJDK.
+  Distribuido por Eclipse Adoptium.
+  Licencia:  GNU General Public License v2 con Classpath Exception (GPL-2.0 WITH Classpath-exception-2.0)
+  Textos de licencia y avisos:  java\legal\  y  java\NOTICE
+  Sitio web:             https://adoptium.net
+  Codigo fuente:         https://github.com/adoptium/jdk21u

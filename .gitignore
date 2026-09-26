@@ -1,0 +1,9 @@
+# Dependencias descargadas por preparar.ps1
+/java/
+/LanguageTool/
+/ngrams/
+
+# Resultados de compilación
+/instalador/build/
+*.exe
+*.zip
