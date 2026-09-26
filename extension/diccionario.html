@@ -16,6 +16,7 @@
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
     body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+    html, body { overflow-x: hidden; }
     main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
     header { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
     header img { width: 48px; height: 48px; }
@@ -33,15 +34,23 @@
     #search { width: 100%; }
     .count { color: var(--muted); font-size: 14px; margin: 12px 0 8px; }
     ul { list-style: none; margin: 0; padding: 0; columns: 3 170px; column-gap: 20px; }
-    li { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 5px 4px;
+    #list li { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 5px 4px;
       border-bottom: 1px solid var(--line); break-inside: avoid; }
-    li button { border: 0; background: none; padding: 0 4px; color: var(--muted); font-size: 15px; }
-    li button:hover { color: var(--bad); }
+    #list li button { border: 0; background: none; padding: 0 4px; color: var(--muted); font-size: 15px; }
+    #list li button:hover { color: var(--bad); }
     .empty { color: var(--muted); font-style: italic; padding: 12px 0; }
     .msg { font-size: 14px; margin-top: 10px; min-height: 20px; }
     .msg.ok { color: var(--ok); } .msg.bad { color: var(--bad); }
     .note { color: var(--muted); font-size: 13px; }
     h2 { font-size: 15px; margin: 0 0 10px; }
+    .tabs { display: flex; gap: 4px; margin: 12px 0 0; border-bottom: 1px solid var(--line); }
+    .tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none;
+      color: var(--muted); padding: 8px 12px; }
+    .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+    .sync { padding: 12px 0 4px; }
+    .sync ol { margin: 0 0 12px; padding-left: 20px; }
+    .sync li { margin-bottom: 6px; }
+    a.btn { display: inline-block; text-decoration: none; color: var(--accent); }
     footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 24px; }
   </style>
 </head>
@@ -70,9 +79,43 @@
   </section>
 
   <section class="card">
-    <h2>Usarlo en otros PCs</h2>
-    <p class="note">Si usas el navegador con <b>la misma cuenta</b> y la sincronización activada, el diccionario se
-      sincroniza solo entre tus PCs. Si no, expórtalo aquí e impórtalo en el otro PC.</p>
+    <h2>Sincronizar entre tus PCs</h2>
+    <p class="note">Tu diccionario viaja solo entre los PCs donde uses el navegador con <b>la misma cuenta</b>
+      y la sincronización activada. Elige tu navegador:</p>
+
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tabEdge" aria-controls="syncEdge">Microsoft Edge</button>
+      <button type="button" role="tab" id="tabChrome" aria-controls="syncChrome">Google Chrome</button>
+    </div>
+
+    <div class="sync" id="syncEdge" role="tabpanel">
+      <ol>
+        <li>Inicia sesión en Edge con tu <b>cuenta de Microsoft</b> (Outlook, Hotmail…).
+          <br><span class="note">¿Solo tienes <b>Gmail</b>? Puedes crear una cuenta de Microsoft con tu misma dirección de Gmail
+          (elige «Usar mi dirección de correo actual»).</span></li>
+        <li>En la configuración de sincronización, activa <b>Sincronizar</b> y deja activado <b>Extensiones</b>.</li>
+        <li>Repite en cada PC con la misma cuenta.</li>
+      </ol>
+      <div class="row">
+        <button type="button" class="primary" data-open="edge://settings/profiles/sync">Abrir sincronización de Edge</button>
+        <a class="btn" href="https://signup.live.com/" target="_blank" rel="noopener">Crear cuenta Microsoft con mi Gmail</a>
+      </div>
+    </div>
+
+    <div class="sync" id="syncChrome" role="tabpanel" hidden>
+      <ol>
+        <li>Inicia sesión en Chrome con tu <b>cuenta de Google (Gmail)</b>.</li>
+        <li>En la configuración de sincronización, activa <b>Sincronizar</b> y deja activado <b>Extensiones</b>.</li>
+        <li>Repite en cada PC con la misma cuenta.</li>
+      </ol>
+      <div class="row">
+        <button type="button" class="primary" data-open="chrome://settings/syncSetup">Abrir sincronización de Chrome</button>
+      </div>
+    </div>
+    <p class="note" id="openHint" hidden></p>
+
+    <h2 style="margin-top:18px">Sin cuenta: exportar e importar</h2>
+    <p class="note">Si no quieres usar una cuenta, exporta tu diccionario aquí e impórtalo en el otro PC.</p>
     <div class="row">
       <button type="button" id="export">Exportar (.txt)</button>
       <button type="button" id="import">Importar…</button>

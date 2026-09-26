@@ -12,6 +12,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - Ya no se marcan como error las palabras alargadas a propósito («holaaa», «siii»).
 - **Página «Mi diccionario»** (icono DD → Abrir): buscar, añadir varias palabras a la vez, quitar, exportar e importar (.txt).
 - El diccionario personal **se sincroniza entre tus PCs** si usas el navegador con la misma cuenta (se migra solo desde la versión anterior).
+- «Mi diccionario» explica cómo activar la sincronización según el navegador: Edge con cuenta de Microsoft (se puede crear con una dirección de Gmail) o Chrome con cuenta de Google, con botón que abre la configuración de sincronización.
 - Compilación automática y publicación de versiones con GitHub Actions.
 
 ### Cambiado

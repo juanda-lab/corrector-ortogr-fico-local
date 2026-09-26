@@ -87,5 +87,30 @@ $('clear').addEventListener('click', async () => {
   message('Diccionario vaciado.');
 });
 
+// ---------- Sincronización: pasos según el navegador ----------
+
+function showBrowser(name) {
+  for (const [tab, panel] of [['tabEdge', 'syncEdge'], ['tabChrome', 'syncChrome']]) {
+    const on = tab === 'tab' + name;
+    $(tab).setAttribute('aria-selected', on);
+    $(panel).hidden = !on;
+  }
+}
+const brands = (navigator.userAgentData && navigator.userAgentData.brands || []).map((b) => b.brand).join(' ');
+showBrowser(/Edge/i.test(brands) || /Edg\//.test(navigator.userAgent) ? 'Edge' : 'Chrome');
+$('tabEdge').addEventListener('click', () => showBrowser('Edge'));
+$('tabChrome').addEventListener('click', () => showBrowser('Chrome'));
+
+// Las páginas internas (edge://, chrome://) solo se pueden abrir desde la extensión
+document.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', async () => {
+  const url = b.dataset.open;
+  try {
+    await chrome.tabs.create({ url });
+  } catch {
+    $('openHint').hidden = false;
+    $('openHint').textContent = `Tu navegador no permitió abrirla. Escribe en la barra de direcciones: ${url}`;
+  }
+}));
+
 DICT.onChange((w) => { words = w; render(); }); // cambios desde otro PC o desde una página
 DICT.load().then((w) => { words = w; render(); });
