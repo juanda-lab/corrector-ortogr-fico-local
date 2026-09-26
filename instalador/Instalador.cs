@@ -1,4 +1,4 @@
-// Instalador de Corrector Local. Desarrollado por Daniel.
+// Instalador de Corrector Local. Desarrollado por Daniel Diaz.
 // Se compila con construir.ps1 (usa el compilador de C# que trae Windows).
 using System;
 using System.Diagnostics;
@@ -108,7 +108,7 @@ class InstallerForm : Form
         });
         header.Controls.Add(new Label
         {
-            Text = "Corrector ortográfico para tu navegador  ·  Desarrollado por Daniel",
+            Text = "Corrector ortográfico para tu navegador  ·  Desarrollado por Daniel Diaz",
             Bounds = new Rectangle(100, 54, 480, 22), ForeColor = Muted, BackColor = Color.Transparent
         });
         return header;

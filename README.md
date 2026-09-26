@@ -7,7 +7,7 @@
 <p align="center">
   Corrector ortográfico y gramatical para el navegador que funciona <b>100 % en tu PC</b>.<br>
   Sin cuentas, sin suscripciones y sin enviar lo que escribes a internet.<br>
-  <sub>Desarrollado por Daniel</sub>
+  <sub>Desarrollado por Daniel Diaz</sub>
 </p>
 
 <p align="center">
@@ -186,4 +186,4 @@ Las reglas propias están en [`reglas/es/grammar_custom.xml`](reglas/es/grammar_
 
 Este proyecto no está afiliado a LanguageTooler GmbH. "LanguageTool" es una marca de sus respectivos dueños.
 
-<p align="center"><sub>Desarrollado por <b>Daniel</b></sub></p>
+<p align="center"><sub>Desarrollado por <b>Daniel Diaz</b></sub></p>

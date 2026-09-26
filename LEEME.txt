@@ -1,4 +1,4 @@
-CORRECTOR LOCAL  -  Desarrollado por Daniel
+﻿CORRECTOR LOCAL  -  Desarrollado por Daniel Diaz
 ===========================================
 Corrector ortografico y gramatical que funciona en tu PC (LanguageTool libre).
 
