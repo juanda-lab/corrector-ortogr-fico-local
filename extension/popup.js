@@ -93,3 +93,8 @@ async function setupSite(disabledSites) {
     });
   });
 }
+$('reportLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  const version = chrome.runtime.getManifest().version;
+  chrome.tabs.create({ url: reportUrl({ title: 'No detecta: ', body: reportBody({ tipo: 'no-detectado', version }) }) });
+});

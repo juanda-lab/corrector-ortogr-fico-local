@@ -13,12 +13,15 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - **Página «Mi diccionario»** (icono DD → Abrir): buscar, añadir varias palabras a la vez, quitar, exportar e importar (.txt).
 - El diccionario personal **se sincroniza entre tus PCs** si usas el navegador con la misma cuenta (se migra solo desde la versión anterior).
 - «Mi diccionario» explica cómo activar la sincronización según el navegador: Edge con cuenta de Microsoft (se puede crear con una dirección de Gmail) o Chrome con cuenta de Google, con botón que abre la configuración de sincronización.
+- **Aviso en el icono**: «!» rojo si el corrector de Windows no responde, «OFF» si está desactivado.
+- **Clic derecho** sobre un texto seleccionado: «Añadir a Mi diccionario» y «Reportar: no detectó un error aquí».
+- **Reportar** en la ventanita de sugerencias, para avisar de sugerencias equivocadas. Abre un aviso en GitHub ya rellenado que el usuario revisa antes de enviar.
 - Compilación automática y publicación de versiones con GitHub Actions.
 
 ### Cambiado
 - Avisos legales: THIRD-PARTY-NOTICES.txt detalla las modificaciones a LanguageTool (exigido por la LGPL) y cada instalador incluye COMPONENTES.txt con las versiones exactas y los enlaces a su código fuente.
 - Instalador mucho más pequeño: LanguageTool solo incluye español, inglés y portugués (y catalán, que usa el detector de idioma).
-- Nuevo permiso `activeTab`, solo para saber en qué sitio estás al abrir la ventana de la extensión.
+- Nuevos permisos: `activeTab` (saber en qué sitio estás al abrir la ventana de la extensión), `contextMenus` (opciones del clic derecho) y `alarms` (comprobar cada minuto si el corrector responde, para el aviso del icono).
 
 ## [1.2.0] - 2026-09-25
 

@@ -394,7 +394,7 @@
                background: var(--chip); color: var(--chip-fg); }
         .rep:hover { background: var(--chip-hover); }
         .none { color: var(--muted); font-style: italic; }
-        .actions { display: flex; gap: 12px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+        .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
         .act { border: 0; background: none; padding: 0; cursor: pointer; color: var(--muted);
                font: 12px "Segoe UI", system-ui, sans-serif; }
         .act:hover { color: var(--fg); text-decoration: underline; }
@@ -462,6 +462,23 @@
       });
       actions.append(add);
     }
+
+    // Reportar una sugerencia equivocada: abre un aviso en GitHub que el usuario revisa antes de enviar
+    const report = document.createElement('button');
+    report.className = 'act';
+    report.textContent = 'Reportar';
+    report.title = 'Avisar de que esta sugerencia está mal (abre GitHub; tú revisas el texto antes de enviarlo)';
+    report.addEventListener('click', () => {
+      hidePopup();
+      chrome.runtime.sendMessage({
+        type: 'report',
+        sentence: m.sentence || (m.context && m.context.text) || '',
+        word: m.word,
+        suggestion: (m.replacements && m.replacements[0] && m.replacements[0].value) || '',
+        rule: m.rule && m.rule.id,
+      }).catch(() => {});
+    });
+    actions.append(report);
 
     if (list.length) {
       const tip = document.createElement('span');

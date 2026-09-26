@@ -35,6 +35,8 @@ Usa por debajo **[LanguageTool](https://github.com/languagetool-org/languagetool
 - ✍️ Subrayado en tiempo real mientras escribes.
 - 🖱️ Clic en la palabra → sugerencias → se reemplaza sola.
 - ⌨️ **Alt+Enter** corrige el error junto al cursor sin usar el ratón.
+- 🖱️ Clic derecho: «Añadir a Mi diccionario» o **reportar** un error que no detectó.
+- 🔴 El icono avisa si el corrector de Windows no está funcionando.
 - 📖 Diccionario personal con su propia página (buscar, exportar, importar) que **se sincroniza entre tus PCs** con la cuenta del navegador; e "Ignorar".
 - 🎚️ Se puede desactivar solo en un sitio concreto.
 - 🌐 Español, español con voseo, inglés, portugués o detección automática.
