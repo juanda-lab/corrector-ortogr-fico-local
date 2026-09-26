@@ -2,6 +2,12 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Versiones según [SemVer](https://semver.org/lang/es/).
 
+## [1.2.0] - 2026-09-25
+
+### Añadido
+- Página de bienvenida al instalar la extensión (por ejemplo desde la tienda): explica cómo descargar el corrector para Windows desde GitHub y detecta sola cuándo está funcionando.
+- Si el corrector no está instalado o está apagado, la ventana de la extensión muestra el enlace de descarga y la guía de instalación.
+
 ## [1.1.0] - 2026-09-25
 
 ### Añadido

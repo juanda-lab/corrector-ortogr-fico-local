@@ -7,6 +7,11 @@ async function getSettings() {
   return { ...DEFAULTS, ...(await chrome.storage.local.get(Object.keys(DEFAULTS))) };
 }
 
+// Al instalar la extensión (p. ej. desde la tienda) se muestra cómo conseguir el corrector para Windows
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === 'install') chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+});
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   handle(msg).then(sendResponse, (err) => sendResponse({ error: String(err && err.message || err) }));
   return true; // respuesta asíncrona

@@ -1,7 +1,4 @@
 const DEFAULTS = { enabled: true, language: 'es', server: 'http://localhost:8081', dictionary: [] };
-// Repositorio de GitHub donde se publican las versiones ("usuario/repositorio").
-// Vacío = no se comprueban actualizaciones.
-const UPDATE_REPO = 'juanda-lab/corrector-ortogr-fico-local';
 const $ = (id) => document.getElementById(id);
 
 function newerThan(a, b) {
@@ -13,9 +10,8 @@ function newerThan(a, b) {
 }
 
 async function checkUpdate() {
-  if (!UPDATE_REPO) return;
   try {
-    const r = await fetch(`https://api.github.com/repos/${UPDATE_REPO}/releases/latest`);
+    const r = await fetch(LINKS.releasesApi);
     if (!r.ok) return;
     const release = await r.json();
     const latest = String(release.tag_name || '').replace(/^v/i, '');
@@ -29,20 +25,26 @@ async function checkUpdate() {
 
 async function checkServer() {
   $('dot').className = 'dot';
-  $('status').textContent = 'Comprobando servidor…';
-  $('statusHint').textContent = '';
+  $('status').textContent = 'Buscando el corrector…';
+  $('serverHelp').hidden = true;
   try {
     const res = await chrome.runtime.sendMessage({ type: 'ping' });
     if (res && res.ok) {
       $('dot').className = 'dot ok';
-      $('status').textContent = 'Servidor funcionando';
+      $('status').textContent = 'Corrector funcionando';
       return;
     }
   } catch { /* cae abajo */ }
   $('dot').className = 'dot bad';
-  $('status').textContent = 'Servidor apagado';
-  $('statusHint').textContent = 'Ejecuta instalar.bat o reinicia el PC y espera unos 20 segundos.';
+  $('status').textContent = 'No se detecta el corrector en tu PC';
+  $('serverHelp').hidden = false;
 }
+
+$('downloadLink').href = LINKS.download;
+$('guideLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+});
 
 function renderDictionary(words) {
   const ul = $('dict');

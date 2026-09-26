@@ -24,7 +24,8 @@
     .status { display: flex; align-items: center; gap: 6px; }
     .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
     .dot.ok { background: var(--ok); } .dot.bad { background: var(--bad); }
-    .hint { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    .hint a { color: var(--accent); font-weight: 600; }
     label { font-weight: 600; }
     select, input[type=text] { width: 100%; margin-top: 4px; padding: 6px 8px; border: 1px solid var(--line);
       border-radius: 6px; background: var(--field); color: var(--fg); font: inherit; }
@@ -58,8 +59,12 @@
   </header>
 
   <section>
-    <div class="status"><span class="dot" id="dot"></span><span id="status">Comprobando servidor…</span></div>
-    <div class="hint" id="statusHint"></div>
+    <div class="status"><span class="dot" id="dot"></span><span id="status">Buscando el corrector…</span></div>
+    <div class="hint" id="serverHelp" hidden>
+      ¿Aún no lo tienes? <a id="downloadLink" target="_blank" rel="noopener">Descárgalo gratis desde GitHub</a>
+      o mira la <a id="guideLink" href="#">guía de instalación</a>.<br>
+      Si ya está instalado, espera unos segundos o reinicia el PC.
+    </div>
   </section>
 
   <section class="update" id="update" hidden>
@@ -90,6 +95,7 @@
 
   <footer>Desarrollado por <strong>Daniel</strong> · v<span id="version"></span></footer>
 
+  <script src="links.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -17,9 +17,9 @@ using Microsoft.Win32;
 [assembly: AssemblyCompany("Daniel Diaz")]
 [assembly: AssemblyProduct("Corrector Local")]
 [assembly: AssemblyCopyright("© 2026 Daniel Diaz. Licencia MIT.")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
-[assembly: AssemblyInformationalVersion("1.1.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyInformationalVersion("1.2.0")]
 
 static class Program
 {
@@ -39,7 +39,7 @@ static class Program
 class InstallerForm : Form
 {
     const string AppName = "Corrector Local";
-    const string Version = "1.1.0";
+    const string Version = "1.2.0";
     const string Publisher = "Daniel Diaz";
     const string UninstallKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\CorrectorLocal";
     const string StartupFile = "LanguageTool local.vbs";

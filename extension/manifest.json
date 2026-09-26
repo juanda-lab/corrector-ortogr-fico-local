@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Corrector Local",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Daniel Diaz",
   "homepage_url": "https://github.com/juanda-lab/corrector-ortogr-fico-local",
   "description": "Corrector ortográfico y gramatical privado: revisa lo que escribes con un servidor en tu propio PC, sin enviar texto a internet.",

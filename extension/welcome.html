@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bienvenido a Corrector Local</title>
+  <style>
+    :root {
+      --bg: #f6f8fc; --card: #ffffff; --fg: #1c1d1f; --muted: #5f6570; --line: #e3e6eb;
+      --accent: #2563eb; --accent-fg: #ffffff; --ok: #16a34a; --warn: #d97706; --wave: #e5484d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #16171a; --card: #202124; --fg: #e8eaed; --muted: #9aa0a6; --line: #3c4043;
+              --accent: #8ab4f8; --accent-fg: #0b1b3a; --ok: #4ade80; --warn: #fbbf24; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg);
+           font: 15px/1.55 "Segoe UI", system-ui, sans-serif; }
+    main { max-width: 720px; margin: 0 auto; padding: 40px 16px 56px; }
+    header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    header img { width: 64px; height: 64px; }
+    h1 { font-size: 26px; margin: 0; line-height: 1.2; }
+    .sub { color: var(--muted); margin: 4px 0 0; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; }
+    .intro { font-size: 16px; }
+    .intro .wavy { text-decoration: underline wavy var(--wave); text-decoration-skip-ink: none; }
+    ol { list-style: none; counter-reset: step; margin: 0; padding: 0; }
+    ol > li { counter-increment: step; position: relative; padding: 0 0 22px 48px; }
+    ol > li:last-child { padding-bottom: 0; }
+    ol > li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 32px; height: 32px;
+      border-radius: 50%; background: var(--accent); color: var(--accent-fg); font-weight: 700;
+      display: grid; place-items: center; }
+    ol h2 { font-size: 16px; margin: 4px 0 4px; }
+    ol p { margin: 0 0 10px; color: var(--muted); }
+    .btn { display: inline-block; background: var(--accent); color: var(--accent-fg); text-decoration: none;
+           font-weight: 600; padding: 10px 18px; border-radius: 8px; }
+    .btn:hover { filter: brightness(1.08); }
+    .link { color: var(--accent); }
+    .status { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--warn); flex: none; }
+    .status.ok .dot { background: var(--ok); }
+    .status.ok { color: var(--ok); }
+    .hint { color: var(--muted); font-weight: 400; font-size: 14px; margin: 6px 0 0 22px; }
+    .note { font-size: 13px; color: var(--muted); }
+    kbd { font: 12px Consolas, monospace; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+    footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 28px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icons/128.png" alt="">
+    <div>
+      <h1>Bienvenido a Corrector Local</h1>
+      <p class="sub">Corrector ortográfico y gramatical que funciona 100&nbsp;% en tu PC</p>
+    </div>
+  </header>
+
+  <section class="card intro">
+    La extensión subraya los errores mientras escribes, por ejemplo <span class="wavy">ola</span> → <b>hola</b>.
+    Para revisar el texto sin enviarlo a internet usa un <b>corrector que se instala en tu PC</b>.
+    Solo hay que instalarlo una vez.
+  </section>
+
+  <section class="card">
+    <ol>
+      <li>
+        <h2>Descarga el corrector para Windows</h2>
+        <p>Es gratis y de código abierto. Incluye todo lo necesario (unos 290&nbsp;MB).</p>
+        <a class="btn" id="download" target="_blank" rel="noopener">Descargar desde GitHub</a>
+      </li>
+      <li>
+        <h2>Ejecuta el instalador</h2>
+        <p>Acepta la licencia, elige la carpeta y pulsa <b>Instalar</b>. No necesita permisos de administrador.
+          Si Windows muestra <i>"Windows protegió su PC"</i>, pulsa <b>Más información → Ejecutar de todas formas</b>.</p>
+      </li>
+      <li>
+        <h2>Comprueba que funciona</h2>
+        <div class="status" id="status"><span class="dot"></span><span id="statusText">Buscando el corrector en tu PC…</span></div>
+        <p class="hint" id="statusHint">Esta página lo detecta sola en cuanto termine la instalación.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card note">
+    <b>Privacidad:</b> lo que escribes solo se envía al corrector de tu propio PC; nunca sale a internet.
+    <a class="link" id="privacy" target="_blank" rel="noopener">Política de privacidad</a> ·
+    <a class="link" id="repo" target="_blank" rel="noopener">Código fuente</a><br>
+    Usa el icono <b>DD</b> de la barra del navegador para activarlo o desactivarlo, cambiar el idioma y ver tu diccionario.
+  </section>
+
+  <footer>Desarrollado por <b>Daniel</b></footer>
+</main>
+<script src="links.js"></script>
+<script src="welcome.js"></script>
+</body>
+</html>
