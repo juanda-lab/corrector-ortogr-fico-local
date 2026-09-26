@@ -20,7 +20,7 @@
 
 **Corrector Local** subraya los errores mientras escribes en el navegador (WhatsApp Web, Gmail, Outlook, Google Sheets, formularios, redes sociales…) y te propone la corrección con un clic.
 
-Usa por debajo **[LanguageTool](https://github.com/languagetool-org/languagetool)**, el motor de corrección de código abierto, ejecutándose como un servidor local en tu propio equipo. Nace como alternativa a la extensión oficial de LanguageTool, que desde 2026 es solo para usuarios de pago.
+Usa por debajo **[LanguageTool](https://github.com/languagetool-org/languagetool)**, el motor de corrección de código abierto, ejecutándose como un servidor local en tu propio equipo. Está pensado para quien quiere revisar lo que escribe sin cuentas, sin suscripciones y sin enviar su texto a ningún servidor. No es un producto oficial de LanguageTool ni está afiliado a LanguageTooler GmbH.
 
 ### Qué detecta
 
@@ -172,7 +172,7 @@ Las reglas propias están en [`reglas/es/grammar_custom.xml`](reglas/es/grammar_
 - **Google Docs** no es compatible (no usa campos de texto normales).
 - En **Google Sheets** solo subraya mientras editas una celda: al pulsar Enter, Sheets dibuja la celda como imagen.
 - La extensión se carga en **modo desarrollador**; algunos equipos de empresa lo bloquean por política.
-- Las funciones de pago de LanguageTool basadas en IA (reescritura, cambio de tono) no están incluidas.
+- No incluye funciones de reescritura ni de cambio de tono con IA: solo corrección ortográfica y gramatical.
 - Para mejorar la detección de confusiones (`a`/`ha`, `tubo`/`tuvo`…) se pueden añadir los [n-gramas de LanguageTool](https://dev.languagetool.org/finding-errors-using-n-gram-data) (varios GB) y activarlos en `server.properties`.
 
 ---

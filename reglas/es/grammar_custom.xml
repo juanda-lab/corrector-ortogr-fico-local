@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Reglas propias de Corrector Local para español.
+  Copyright (c) 2026 Daniel Diaz. Licencia MIT (ver LICENSE); se distribuye dentro de
+  LanguageTool (LGPL-2.1+), con la que es compatible.
   Errores frecuentes al escribir rápido (chats, correos) que el diccionario no marca
   porque coinciden con palabras poco usadas, o que marca con malas sugerencias.
   preparar.ps1 copia este archivo a LanguageTool/org/languagetool/rules/es/.

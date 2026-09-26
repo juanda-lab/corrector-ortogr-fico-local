@@ -7,3 +7,6 @@
 /instalador/build/
 *.exe
 *.zip
+
+# Generado al compilar
+/COMPONENTES.txt

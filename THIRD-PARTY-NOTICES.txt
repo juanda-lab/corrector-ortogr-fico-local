@@ -2,37 +2,50 @@ AVISOS DE TERCEROS - Corrector Local
 ====================================
 
 Corrector Local (c) 2026 Daniel Diaz, bajo licencia MIT (archivo LICENSE).
-El instalador incluye, sin modificar, los siguientes componentes de terceros.
-Cada uno se rige por su propia licencia, que se instala junto a el.
+El instalador incluye los siguientes componentes de terceros. Cada uno se rige
+por su propia licencia, que se instala junto a el. Corrector Local es un programa
+aparte: solo se comunica con ellos por HTTP y no enlaza su codigo con el suyo.
+
+Las versiones exactas incluidas en cada instalador, con los enlaces a su codigo
+fuente, estan en el archivo COMPONENTES.txt (se genera al compilar).
 
 
 1. LanguageTool
 ---------------
 Motor de correccion ortografica y gramatical.
   Copyright (c) Daniel Naber y los colaboradores de LanguageTool.
-  Licencia:  GNU Lesser General Public License v2.1 o posterior (LGPL-2.1+)
-  Texto de la licencia:  LanguageTool\COPYING.txt
-  Sitio web:             https://languagetool.org
-  Codigo fuente:         https://github.com/languagetool-org/languagetool
+  Licencia:          GNU Lesser General Public License v2.1 o posterior (LGPL-2.1+)
+  Texto de licencia: LanguageTool\COPYING.txt
+  Licencias de sus dependencias: LanguageTool\third-party-licenses\
+  Sitio web:         https://languagetool.org
+  Codigo fuente:     https://github.com/languagetool-org/languagetool
+                     (version exacta: ver COMPONENTES.txt; etiqueta vX.Y del repositorio)
 
-Se distribuye la version oficial sin cambios en su codigo; solo se eliminan los
-datos de los idiomas que Corrector Local no usa (se conservan espanol, ingles,
-portugues y catalan) para reducir el tamano, y se anade el archivo de reglas propias
-rules/es/grammar_custom.xml (carpeta reglas\ del proyecto). El proceso esta en preparar.ps1.
-Corrector Local solo se comunica con el por HTTP (no lo enlaza ni lo modifica).
-Puedes sustituir la carpeta LanguageTool\ por la version completa o por
-cualquier otra, incluida una compilada por ti.
+MODIFICACIONES (aviso exigido por la LGPL, seccion 2)
+Desde el 26 de septiembre de 2026, Corrector Local distribuye la version oficial
+de LanguageTool con estos cambios, que hace automaticamente el script preparar.ps1:
+  a) Se eliminan los datos y diccionarios de los idiomas que no se usan (se
+     conservan espanol, ingles, portugues y catalan) y se quitan esos idiomas de
+     META-INF/org/languagetool/language-module.properties.
+  b) Se anade el archivo de reglas org/languagetool/rules/es/grammar_custom.xml
+     (errores frecuentes al escribir en espanol), escrito por Daniel Diaz y
+     publicado bajo licencia MIT, compatible con la LGPL.
+El codigo Java de LanguageTool no se modifica. Puedes sustituir la carpeta
+LanguageTool\ por la version oficial completa o por una compilada por ti.
 
 Corrector Local no esta afiliado ni respaldado por LanguageTooler GmbH.
-"LanguageTool" es una marca de sus respectivos titulares.
+"LanguageTool" es una marca de sus respectivos titulares; se nombra solo para
+indicar el origen del motor de correccion.
 
 
 2. Eclipse Temurin (OpenJDK) - Java 21 JRE
 -----------------------------------------
-Entorno de ejecucion Java necesario para LanguageTool.
+Entorno de ejecucion Java necesario para LanguageTool. Se distribuye sin cambios.
   Copyright (c) Oracle y/o sus filiales, y los colaboradores de OpenJDK.
   Distribuido por Eclipse Adoptium.
-  Licencia:  GNU General Public License v2 con Classpath Exception (GPL-2.0 WITH Classpath-exception-2.0)
-  Textos de licencia y avisos:  java\legal\  y  java\NOTICE
-  Sitio web:             https://adoptium.net
-  Codigo fuente:         https://github.com/adoptium/jdk21u
+  Licencia:          GNU General Public License v2 con Classpath Exception
+                     (GPL-2.0 WITH Classpath-exception-2.0)
+  Textos de licencia y avisos: java\legal\  y  java\NOTICE
+  Sitio web:         https://adoptium.net
+  Codigo fuente:     https://github.com/adoptium/jdk21u
+                     (version exacta y commit de origen: ver COMPONENTES.txt y java\release)

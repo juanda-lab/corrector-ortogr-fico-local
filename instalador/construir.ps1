@@ -37,6 +37,30 @@ function New-Zip($zipPath, $root, $excluir) {
 # 0. Dependencias (Java y LanguageTool) y reglas propias. Solo descarga lo que falta.
 & (Join-Path $proj 'preparar.ps1')
 
+# 0b. COMPONENTES.txt: versiones exactas de terceros y enlaces a su código fuente (LGPL/GPL)
+$javaRelease = Get-Content (Join-Path $proj 'java\release') | ConvertFrom-StringData
+$javaVersion = $javaRelease.JAVA_VERSION.Trim('"')
+$javaSource  = $javaRelease.SOURCE.Trim('"')
+$ltLine = & (Join-Path $proj 'java\bin\java.exe') -jar (Join-Path $proj 'LanguageTool\languagetool-commandline.jar') --version 2>$null | Select-Object -First 1
+$ltVersion = [regex]::Match("$ltLine", 'version ([\d.]+)').Groups[1].Value
+if (-not $ltVersion) { throw "No se pudo leer la versión de LanguageTool: $ltLine" }
+$componentes = @"
+COMPONENTES DE TERCEROS INCLUIDOS - Corrector Local $version
+Generado al compilar el $(Get-Date -Format 'yyyy-MM-dd').
+
+LanguageTool $ltVersion  (LGPL-2.1+, con las modificaciones descritas en THIRD-PARTY-NOTICES.txt)
+  Detalle:        $ltLine
+  Codigo fuente:  https://github.com/languagetool-org/languagetool/tree/v$ltVersion
+  Descarga:       https://languagetool.org/download/
+
+Eclipse Temurin JRE $javaVersion  (GPL-2.0 WITH Classpath-exception-2.0, sin cambios)
+  Origen:         $javaSource
+  Codigo fuente:  https://github.com/adoptium/jdk21u
+  Descarga:       https://adoptium.net/temurin/releases/?version=21
+"@
+[IO.File]::WriteAllText((Join-Path $proj 'COMPONENTES.txt'), $componentes.Replace("`r`n", "`n").Replace("`n", "`r`n"), (New-Object Text.UTF8Encoding $false))
+Write-Host "Componentes: LanguageTool $ltVersion, Java $javaVersion"
+
 # 1. Paquete con lo que se instala (sin instalador, repositorio ni documentación)
 Write-Host 'Empaquetando archivos...'
 $payload = Join-Path $build 'payload.zip'

@@ -16,6 +16,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - Compilación automática y publicación de versiones con GitHub Actions.
 
 ### Cambiado
+- Avisos legales: THIRD-PARTY-NOTICES.txt detalla las modificaciones a LanguageTool (exigido por la LGPL) y cada instalador incluye COMPONENTES.txt con las versiones exactas y los enlaces a su código fuente.
 - Instalador mucho más pequeño: LanguageTool solo incluye español, inglés y portugués (y catalán, que usa el detector de idioma).
 - Nuevo permiso `activeTab`, solo para saber en qué sitio estás al abrir la ventana de la extensión.
 
