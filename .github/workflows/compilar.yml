@@ -43,7 +43,8 @@ jobs:
         run: |
           $dir = "$env:RUNNER_TEMP\salida"
           $version = (Get-Content extension/manifest.json -Raw | ConvertFrom-Json).version
-          Rename-Item "$dir\Instalador Corrector Local.exe" "Instalador-Corrector-Local-$version.exe"
+          # Nombre fijo: el enlace .../releases/latest/download/Instalador-Corrector-Local.exe siempre da la última versión
+          Rename-Item "$dir\Instalador Corrector Local.exe" "Instalador-Corrector-Local.exe"
           Rename-Item "$dir\Corrector Local $version - extension.zip" "Corrector-Local-$version-extension.zip"
           Get-ChildItem $dir | ForEach-Object { "{0}  {1:N1} MB" -f $_.Name, ($_.Length / 1MB) }
           "dir=$dir" >> $env:GITHUB_OUTPUT
@@ -63,7 +64,7 @@ jobs:
         run: |
           $dir = "${{ steps.archivos.outputs.dir }}"
           $notas = @"
-          **Instalación:** descarga ``Instalador-Corrector-Local-*.exe``, ejecútalo y sigue los pasos. Al final añade la extensión a Edge o Chrome (el instalador te guía).
+          **Instalación:** descarga ``Instalador-Corrector-Local.exe``, ejecútalo y sigue los pasos. Al final añade la extensión a Edge o Chrome (el instalador te guía).
 
           - Corrector ortográfico y gramatical que funciona 100 % en tu PC
           - Extensión para Edge y Chrome: subrayado en tiempo real y sugerencias con un clic

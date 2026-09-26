@@ -45,13 +45,14 @@ class InstallerForm : Form
     const string StartupFile = "LanguageTool local.vbs";
     // 127.0.0.1 y no "localhost": el servidor solo escucha en IPv4 y Windows tarda ~2 s en descartar ::1
     const string ServerUrl = "http://127.0.0.1:8081/v2/languages";
+    const string StoreUrl = "https://microsoftedge.microsoft.com/addons/detail/eajjoflldpddkbfbkbjdnmgeabilkdea";
 
     static readonly Color Accent = Color.FromArgb(37, 99, 235);
     static readonly Color Muted = Color.FromArgb(100, 106, 115);
     static readonly Color Line = Color.FromArgb(226, 228, 232);
 
     Panel pageLicense, pageChoose, pageProgress, pageDone;
-    TextBox pathBox, extPathBox;
+    TextBox pathBox;
     CheckBox acceptBox;
     Button nextBtn, installBtn, cancelBtn, finishBtn;
     ProgressBar bar;
@@ -200,7 +201,7 @@ class InstallerForm : Form
                    "  •  Copiar el corrector (LanguageTool) y Java a esa carpeta  —  unos 290 MB\r\n" +
                    "  •  Hacer que arranque solo cada vez que prendas el PC\r\n" +
                    "  •  Añadirlo a \"Aplicaciones instaladas\" de Windows para poder desinstalarlo\r\n" +
-                   "  •  Al final, abrir Edge para que añadas la extensión (3 clics)\r\n\r\n" +
+                   "  •  Al final, ofrecerte la extensión en la tienda de Edge (si aún no la tienes)\r\n\r\n" +
                    "No necesita permisos de administrador. Nada de lo que escribes sale de tu PC.",
             Bounds = new Rectangle(24, 136, 552, 140), ForeColor = Color.FromArgb(55, 60, 68)
         });
@@ -227,7 +228,7 @@ class InstallerForm : Form
         var p = new Panel();
         p.Controls.Add(new Label
         {
-            Text = "¡Listo! Solo falta añadir la extensión a Edge", Bounds = new Rectangle(24, 16, 540, 24),
+            Text = "¡Listo! El corrector está instalado", Bounds = new Rectangle(24, 16, 540, 24),
             Font = new Font("Segoe UI Semibold", 11F)
         });
         serverLabel = new Label { Bounds = new Rectangle(24, 42, 552, 20), ForeColor = Muted };
@@ -235,31 +236,30 @@ class InstallerForm : Form
 
         p.Controls.Add(new Label
         {
-            Text = "1.  Pulsa \"Abrir extensiones de Edge\".\r\n" +
-                   "2.  Activa \"Modo de desarrollador\" (panel izquierdo de Edge).\r\n" +
-                   "3.  Pulsa \"Cargar desempaquetada\", pega la ruta (Ctrl+V) y acepta.\r\n" +
-                   "      (La ruta ya está copiada; si hace falta, usa \"Copiar ruta\".)\r\n" +
-                   "4.  Recarga WhatsApp Web y escribe: los errores aparecerán subrayados.",
-            Bounds = new Rectangle(24, 72, 552, 104), ForeColor = Color.FromArgb(55, 60, 68)
+            Text = "Último paso: añade la extensión Corrector Local a tu navegador.\r\n\r\n" +
+                   "•  Si ya la añadiste desde la tienda, no tienes que hacer nada más:\r\n" +
+                   "    recarga las páginas abiertas y empieza a escribir.\r\n" +
+                   "•  Si no, pulsa \"Obtener la extensión\" y luego \"Obtener\" en la tienda de Edge.",
+            Bounds = new Rectangle(24, 76, 552, 96), ForeColor = Color.FromArgb(55, 60, 68)
         });
 
-        extPathBox = new TextBox { Bounds = new Rectangle(24, 184, 440, 28), ReadOnly = true, BackColor = Color.FromArgb(246, 248, 252) };
-        p.Controls.Add(extPathBox);
-
-        var copy = MakeButton("Copiar ruta", false);
-        copy.Bounds = new Rectangle(472, 182, 104, 30);
-        copy.Click += (s, e) => CopyExtensionPath();
-        p.Controls.Add(copy);
-
-        var openEdge = MakeButton("Abrir extensiones de Edge", true);
-        openEdge.Bounds = new Rectangle(24, 228, 220, 34);
-        openEdge.Click += (s, e) => OpenEdgeExtensions();
-        p.Controls.Add(openEdge);
+        var store = MakeButton("Obtener la extensión", true);
+        store.Bounds = new Rectangle(24, 184, 200, 36);
+        store.Click += (s, e) => OpenStore();
+        p.Controls.Add(store);
 
         var openFolder = MakeButton("Abrir carpeta", false);
-        openFolder.Bounds = new Rectangle(254, 228, 130, 34);
+        openFolder.Bounds = new Rectangle(234, 184, 130, 36);
         openFolder.Click += (s, e) => Process.Start("explorer.exe", "\"" + installDir + "\"");
         p.Controls.Add(openFolder);
+
+        var manual = new LinkLabel
+        {
+            Text = "Instalación manual (Google Chrome o modo desarrollador)", Bounds = new Rectangle(24, 236, 400, 22),
+            LinkColor = Accent, ActiveLinkColor = Accent
+        };
+        manual.LinkClicked += (s, e) => ShowManualSteps();
+        p.Controls.Add(manual);
         return p;
     }
 
@@ -481,12 +481,10 @@ class InstallerForm : Form
     void Finish(bool running)
     {
         bar.Value = 100;
-        extPathBox.Text = Path.Combine(installDir, "extension");
         serverLabel.Text = running
             ? "✔  El corrector está funcionando y arrancará solo con Windows."
             : "⚠  El corrector aún no responde. Reinicia el PC; si sigue igual, ejecuta iniciar-servidor.bat.";
         serverLabel.ForeColor = running ? Color.FromArgb(22, 128, 61) : Color.FromArgb(180, 83, 9);
-        CopyExtensionPath();
         ShowPage(pageDone);
         installBtn.Visible = false;
         cancelBtn.Visible = false;
@@ -494,19 +492,28 @@ class InstallerForm : Form
         AcceptButton = finishBtn;
     }
 
-    void CopyExtensionPath()
+    // Abre la ficha de la extensión en la tienda de Edge (en Edge si está; si no, en el navegador predeterminado)
+    void OpenStore()
     {
-        try { Clipboard.SetText(extPathBox.Text); } catch { }
-    }
-
-    void OpenEdgeExtensions()
-    {
-        CopyExtensionPath();
-        try { Process.Start("msedge.exe", "edge://extensions"); }
+        try { Process.Start("msedge.exe", StoreUrl); }
         catch
         {
-            MessageBox.Show(this, "No se encontró Edge. Ábrelo y escribe en la barra de direcciones:\r\nedge://extensions",
-                AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try { Process.Start(StoreUrl); } catch { }
         }
+    }
+
+    // Instrucciones para cargar la extensión incluida (Chrome, o sin usar la tienda)
+    void ShowManualSteps()
+    {
+        string ext = Path.Combine(installDir, "extension");
+        try { Clipboard.SetText(ext); } catch { }
+        MessageBox.Show(this,
+            "La extensión también está en esta carpeta (ruta copiada al portapapeles):\r\n" + ext + "\r\n\r\n" +
+            "1.  Abre  edge://extensions  (Edge) o  chrome://extensions  (Chrome).\r\n" +
+            "2.  Activa \"Modo de desarrollador\".\r\n" +
+            "3.  Pulsa \"Cargar desempaquetada\" / \"Cargar descomprimida\", pega la ruta (Ctrl+V) y acepta.\r\n" +
+            "4.  Recarga las páginas abiertas y escribe.\r\n\r\n" +
+            "No borres ni muevas esa carpeta: el navegador la usa desde ahí.",
+            "Instalación manual de la extensión", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 }

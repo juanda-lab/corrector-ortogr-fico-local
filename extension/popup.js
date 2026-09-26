@@ -40,7 +40,7 @@ async function checkServer() {
   $('serverHelp').hidden = false;
 }
 
-$('downloadLink').href = LINKS.download;
+$('downloadLink').href = LINKS.installer;
 $('guideLink').addEventListener('click', (e) => {
   e.preventDefault();
   chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });

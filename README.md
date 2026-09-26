@@ -46,34 +46,36 @@ Usa por debajo **[LanguageTool](https://github.com/languagetool-org/languagetool
 
 ## Instalación
 
-### 1. Descarga e instala
+Hay dos caminos; cualquiera de los dos te lleva al otro paso.
 
-Descarga **`Instalador Corrector Local.exe`** desde la sección [**Releases**](../../releases/latest) y ejecútalo.
+### Opción A — Empieza por la tienda de Edge (recomendado)
+
+1. Añade **[Corrector Local desde Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/eajjoflldpddkbfbkbjdnmgeabilkdea)**.
+2. Se abre una página de bienvenida: pulsa **Descargar el instalador**.
+3. Abre el archivo descargado. El instalador te pregunta **en qué carpeta instalarlo**; acepta la licencia y pulsa **Instalar**.
+4. La página de bienvenida se pone en verde sola cuando detecta el corrector. Listo.
+
+### Opción B — Empieza por el instalador
+
+1. Descarga **[Instalador-Corrector-Local.exe](../../releases/latest/download/Instalador-Corrector-Local.exe)** (desde [Releases](../../releases/latest)) y ejecútalo.
 
 <p align="center">
   <img src="docs/instalador-1.png" width="480" alt="Instalador: elegir carpeta">
 </p>
 
-- Acepta la licencia y elige la carpeta donde se instalará (por defecto `C:\Users\<usuario>\CorrectorLocal`).
-- Se crean accesos en **Inicio → Corrector Local** (carpeta, léeme, licencias y desinstalar).
-- **No necesita permisos de administrador.** Descarga de unos 150 MB; instalado ocupa unos 290 MB (incluye Java y LanguageTool).
-- Si Windows muestra *"Windows protegió su PC"*: **Más información → Ejecutar de todas formas** (el instalador no tiene firma digital de pago).
-
-### 2. Añade la extensión al navegador
-
-Los navegadores no permiten que un programa instale extensiones por su cuenta, así que este paso es manual (solo una vez):
+2. Acepta la licencia, elige la carpeta (por defecto `C:\Users\<usuario>\CorrectorLocal`) y pulsa **Instalar**.
+3. Al terminar, pulsa **Obtener la extensión** para añadirla desde la tienda de Edge.
 
 <p align="center">
   <img src="docs/instalador-2.png" width="480" alt="Instalador: pasos finales">
 </p>
 
-| | Microsoft Edge | Google Chrome |
-|---|---|---|
-| 1 | Abre `edge://extensions` (o pulsa **Abrir extensiones de Edge** en el instalador) | Abre `chrome://extensions` |
-| 2 | Activa **Modo de desarrollador** (panel izquierdo) | Activa **Modo de desarrollador** (arriba a la derecha) |
-| 3 | **Cargar desempaquetada** → pega la ruta (ya está copiada) | **Cargar descomprimida** → elige la carpeta `extension` |
+**Detalles del instalador:**
+- **No necesita permisos de administrador.** Descarga de unos 150 MB; instalado ocupa unos 290 MB (incluye Java y LanguageTool).
+- Crea accesos en **Inicio → Corrector Local** (carpeta, léeme, licencias y desinstalar).
+- Si Windows muestra *"Windows protegió su PC"*: **Más información → Ejecutar de todas formas** (el instalador aún no tiene firma digital).
 
-Recarga la página donde escribes y listo.
+**Google Chrome o sin tienda:** en la pantalla final del instalador, **Instalación manual** explica cómo cargar la extensión incluida (`chrome://extensions` → **Modo de desarrollador** → **Cargar descomprimida** → carpeta `extension`).
 
 > 💡 Si tenías la extensión oficial de LanguageTool, quítala: por seguridad el servidor solo atiende a la extensión Corrector Local.
 > En Chrome, si aparece el aviso *"Desactivar extensiones en modo de desarrollador"*, ciérralo con la **X**.

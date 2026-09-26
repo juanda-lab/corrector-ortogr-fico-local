@@ -1,3 +1,4 @@
+document.getElementById('installer').href = LINKS.installer;
 document.getElementById('download').href = LINKS.download;
 document.getElementById('privacy').href = LINKS.privacy;
 document.getElementById('repo').href = LINKS.repo;

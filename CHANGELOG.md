@@ -7,6 +7,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 ### Añadido
 - Atajo **Alt+Enter**: corrige con la primera sugerencia el error junto al cursor, sin usar el ratón.
 - **Revisar en este sitio**: interruptor en la ventana de la extensión para desactivarla solo en una página concreta.
+- Instalación más sencilla: la página de bienvenida y la ventana de la extensión descargan el instalador directamente, y la pantalla final del instalador abre la extensión en la tienda de Edge (la instalación manual queda como opción avanzada).
 - Compilación automática y publicación de versiones con GitHub Actions.
 
 ### Cambiado
