@@ -64,7 +64,7 @@ Write-Host "Componentes: LanguageTool $ltVersion, Java $javaVersion"
 # 1. Paquete con lo que se instala (sin instalador, repositorio ni documentación)
 Write-Host 'Empaquetando archivos...'
 $payload = Join-Path $build 'payload.zip'
-New-Zip $payload $proj @('instalador', 'docs', 'reglas', '.git', '.github', '.gitignore', '.gitattributes', 'README.md', 'preparar.ps1', 'CHANGELOG.md', 'SECURITY.md', 'PRIVACY.md', 'CODE_SIGNING.md', 'DESINSTALAR.md')
+New-Zip $payload $proj @('instalador', 'docs', 'reglas', '.git', '.github', '.gitignore', '.gitattributes', 'README.md', 'preparar.ps1', 'CHANGELOG.md', 'SECURITY.md', 'PRIVACY.md', 'DESINSTALAR.md')
 
 # 2. Texto de la página "Licencia y privacidad" del instalador
 $privacidad = @'
