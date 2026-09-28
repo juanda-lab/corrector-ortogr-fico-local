@@ -182,7 +182,6 @@ Las reglas propias están en [`reglas/es/grammar_custom.xml`](reglas/es/grammar_
 ## Créditos y licencias
 
 - Código de este proyecto: [MIT](LICENSE) © 2026 Daniel Diaz.
-- Firma de código: ver [CODE_SIGNING.md](CODE_SIGNING.md) (solicitada a SignPath Foundation, gratuita para proyectos de código abierto).
 - Privacidad: [PRIVACY.md](PRIVACY.md) · Seguridad: [SECURITY.md](SECURITY.md) · Cambios: [CHANGELOG.md](CHANGELOG.md) · Terceros: [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)
 - [LanguageTool](https://languagetool.org) — LGPL 2.1. Se distribuye sin modificar dentro del instalador.
 - [Eclipse Temurin](https://adoptium.net) (Java 21) — GPLv2 con Classpath Exception.
