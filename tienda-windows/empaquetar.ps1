@@ -10,7 +10,7 @@
 # La Microsoft Store firma el paquete al publicarlo: no hace falta certificado propio.
 param(
   [string]$Nombre = 'DanielDiazDD.CorrectorLocal',
-  [string]$Editor = 'CN=Daniel Diaz DD',
+  [string]$Editor = 'CN=D1C43B80-E1C2-4451-9BE8-86FB672173B4',   # Partner Center → Identidad del producto
   [string]$EditorVisible = 'Daniel Diaz DD',
   [string]$Salida,
   [switch]$Probar
