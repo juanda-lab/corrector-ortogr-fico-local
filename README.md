@@ -155,6 +155,7 @@ El flujo [`.github/workflows/compilar.yml`](.github/workflows/compilar.yml) comp
 ├── extension/             Extensión del navegador (Edge / Chrome)
 ├── instalador/            Código del instalador .exe y script de compilación
 ├── reglas/es/             Reglas propias de corrección (errores frecuentes al escribir rápido)
+├── tienda-windows/        Paquete MSIX para la Microsoft Store (lanzador, manifiesto, empaquetar.ps1)
 ├── docs/                  Imágenes del README
 ├── iniciar-servidor.bat   Arranca el servidor mostrando una ventana
 ├── detener-servidor.bat   Detiene el servidor

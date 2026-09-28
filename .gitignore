@@ -10,3 +10,5 @@
 
 # Generado al compilar
 /COMPONENTES.txt
+/tienda-windows/build/
+*.msix
